@@ -1,0 +1,48 @@
+
+# ========================================================================================
+#                                                                                    Error
+#                                                                                    =====
+# ----------------------------------------------------------
+#                                                     Common
+#                                                     ------
+error.constraint.confirmed={0}と{1}の値が一致していません。
+error.constraint.datetime={0}には日付を指定して下さい。
+error.constraint.length.min={0}の長さは{1}以上である必要があります。
+error.constraint.length.max={0}の長さは{1}以下である必要があります。
+error.constraint.length.different={0}の長さは{1}である必要があります。
+error.constraint.matched={0}の書式が違っています。
+error.constraint.numeric={0}には数値を指定して下さい。
+error.constraint.numeric.greaterEqual={0}には{1}以上の値を指定して下さい。
+error.constraint.numeric.greaterThan={0}には{1}より大きい値を指定して下さい。
+error.constraint.numeric.integer={0}には整数を指定して下さい。
+error.constraint.numeric.lessEqual={0}には{1}以下の値を指定して下さい。
+error.constraint.numeric.lessThan={0}には{1}より小さい値を指定して下さい。
+error.constraint.required={0}の値を指定して下さい。
+error.constraint.token.tokenRequired=ページ遷移が想定どおり行なわれなかったため、リクエストが正しく処理されませんでした。
+error.entityAlreadyDeleted=該当エントリが削除されています。
+error.entityAlreadyExists=重複するエントリが存在します。
+error.entityAlreadyUpdated=該当エントリが更新されています。
+error.illegalTransition=画面利用の正しい手順を確認して下さい。
+
+# ========================================================================================
+#                                                                                    Label
+#                                                                                    =====
+# ----------------------------------------------------------
+#                                                     Common
+#                                                     ------
+label.memberName=会員名称
+label.memberAccount=会員アカウント
+label.memberStatusCode=会員ステータス
+label.birthdate=生年月日
+label.formalizedDate=正式会員日
+label.formalizedDatetime=正式会員日時
+label.formalizedDateFrom=正式会員日(From)
+label.formalizedDateTo=正式会員日(To)
+
+# ----------------------------------------------------------
+#                                                       Page
+#                                                       ----
+label.book_regist_inputPage.bookName=書籍名
+label.book_regist_inputPage.bookNameKana=フリガナ
+label.book_regist_inputPage.categorySelect=カテゴリー
+label.book_regist_inputPage.exp=説明

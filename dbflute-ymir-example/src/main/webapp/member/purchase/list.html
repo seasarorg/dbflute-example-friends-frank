@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:te="http://www.seasar.org/teeda/extension" xml:lang="ja" lang="ja">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="../../css/mainte.css" />
+	<title>会員購入履歴</title>
+</head>
+
+<body>
+<form action="#" method="post" tal:attributes="action page:/member/purchase/list.html">
+<h1>会員購入履歴</h1>
+<hr />
+<div class="memberPurchaseInformation">
+<table>
+	<tr>
+		<td>会員ID</td>
+		<td>
+			<span tal:content="self/memberId">3</span>
+			<input name="memberId" type="hidden" tal:attributes="value self/memberId"/>
+		</td>
+	</tr>
+	<tr>
+		<td>会員名</td>
+		<td><span tal:content="self/memberName">ミルコクロコップ</span></td>
+	</tr>
+</table>
+</div>
+<div class="purchaseList">
+<table>
+	<thead>
+		<tr>
+			<th>購入日時</th>
+			<th>商品名</th>
+			<th>商品価格</th>
+			<th>商品数量</th>
+			<th>支払状態</th>
+			<th>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr tal:repeat="purchase self/purchaseItems">
+			<td tal:content="purchase/purchaseDatetime">2007/11/11 23:23:23</td>
+			<td tal:content="purchase/productName">ハイキック冷蔵庫</td>
+			<td tal:content="purchase/purchasePrice">6,234</td>
+			<td tal:content="purchase/purchaseCount">12</td>
+			<td>
+				<span tal:condition="purchase/isPaymentComplete">支払済</span>
+				<span tal:condition="not:purchase/isPaymentComplete">未払い</span>
+			</td>
+			<td>
+				<input type="submit" value="削除" tal:attributes="name string:delete[${purchase/purchaseId}]" name="delete" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+<a href="../search/list.html">会員一覧</a>
+</form>
+</body>
+</html>

@@ -1,0 +1,8 @@
+#Thu Jan 15 19:55:38 JST 2009
+ExportIgnore=^(status\\.properties|\\..*|.*\\.(bak|tmp|ori?g))$
+baseDir=/dbflute-ymir-example/src/main/webapp
+checkServer=true
+contextName=/dbflute-ymir-example
+httpPort=8080
+eclipse.preferences.version=1
+webType=Tomcat6

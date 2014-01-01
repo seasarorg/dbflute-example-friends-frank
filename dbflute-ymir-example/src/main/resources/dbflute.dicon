@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+    "http://www.seasar.org/dtd/components21.dtd">
+
+<components namespace="dbflute">
+    <include path="j2ee.dicon"/>
+
+    <!-- The components of DBFlute Runtime. -->
+    <component name="introduction" class="com.example.dbflute.ymir.dbflute.allcommon.DBFluteInitializer"/>
+    <component name="invokerAssistant" class="com.example.dbflute.ymir.dbflute.allcommon.ImplementedInvokerAssistant"/>
+    <component name="commonColumnAutoSetupper" class="com.example.dbflute.ymir.dbflute.allcommon.ImplementedCommonColumnAutoSetupper"/>
+    <component name="behaviorSelector" class="com.example.dbflute.ymir.dbflute.allcommon.ImplementedBehaviorSelector"/>
+    <component name="behaviorCommandInvoker" class="org.seasar.dbflute.bhv.core.BehaviorCommandInvoker"/>
+
+    <!-- The components of Behavior. -->
+    <component name="memberBhv" class="com.example.dbflute.ymir.dbflute.exbhv.MemberBhv"/>
+    <component name="memberAddressBhv" class="com.example.dbflute.ymir.dbflute.exbhv.MemberAddressBhv"/>
+    <component name="memberLoginBhv" class="com.example.dbflute.ymir.dbflute.exbhv.MemberLoginBhv"/>
+    <component name="memberSecurityBhv" class="com.example.dbflute.ymir.dbflute.exbhv.MemberSecurityBhv"/>
+    <component name="memberServiceBhv" class="com.example.dbflute.ymir.dbflute.exbhv.MemberServiceBhv"/>
+    <component name="memberStatusBhv" class="com.example.dbflute.ymir.dbflute.exbhv.MemberStatusBhv"/>
+    <component name="memberWithdrawalBhv" class="com.example.dbflute.ymir.dbflute.exbhv.MemberWithdrawalBhv"/>
+    <component name="productBhv" class="com.example.dbflute.ymir.dbflute.exbhv.ProductBhv"/>
+    <component name="productCategoryBhv" class="com.example.dbflute.ymir.dbflute.exbhv.ProductCategoryBhv"/>
+    <component name="productStatusBhv" class="com.example.dbflute.ymir.dbflute.exbhv.ProductStatusBhv"/>
+    <component name="purchaseBhv" class="com.example.dbflute.ymir.dbflute.exbhv.PurchaseBhv"/>
+    <component name="regionBhv" class="com.example.dbflute.ymir.dbflute.exbhv.RegionBhv"/>
+    <component name="serviceRankBhv" class="com.example.dbflute.ymir.dbflute.exbhv.ServiceRankBhv"/>
+    <component name="withdrawalReasonBhv" class="com.example.dbflute.ymir.dbflute.exbhv.WithdrawalReasonBhv"/>
+</components>

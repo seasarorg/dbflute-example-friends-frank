@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>会員編集：入力</title>
+<!-- Styles should be defined on CSS files but here not because this is a mere example. -->
+<style type="text/css">
+.label-normal {
+	color: #000099;
+}
+.label-invalid {
+	color: #DD6666;
+}
+</style>
+</head>
+<body>
+<form name="inputForm" method="post" tal:attributes="action page:/member/edit/input.html" action="#">
+<ul tal:condition="notes">
+  <li tal:repeat="note notes/notes" tal:content="note/%value">MESSAGE</li>
+</ul>
+
+<table>
+	<tr>
+		<td><label class="label-normal">会員ID</label></td>
+		<td>
+			<span tal:content="self/memberId">3</span>
+			<input type="hidden" name="memberId" tal:attributes="value self/memberId"/>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<label tal:attributes="class decorate-by-notes:memberName with !label-invalid" class="label-normal">
+				会員名称(*)
+			</label>
+		</td>
+		<td>
+			<input type="text" name="memberName" tal:attributes="value self/memberName"/>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<label tal:attributes="class decorate-by-notes:memberAccount with !label-invalid" class="label-normal">
+				会員アカウント(*)
+			</label>
+		</td>
+		<td>
+			<input type="text" name="memberAccount" tal:attributes="value self/memberAccount" value=""/>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<label tal:attributes="class decorate-by-notes:memberStatusCodeSelect.value with !label-invalid" class="label-normal">
+				会員ステータス(*)
+			</label>
+		</td>
+		<td>
+			<select name="memberStatusCodeSelect.value">
+			    <option value="" /> 
+				<option tal:repeat="option self/memberStatusCodeSelect/options"
+				        tal:attributes="value option/value; selected option/selected"
+				        tal:content="option/content" value="ABC" selected>ハイキック会員</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<label tal:attributes="class decorate-by-notes:birthdate with !label-invalid" class="label-normal">
+				生年月日
+			</label>
+		</td>
+		<td>
+			<input type="text" name="birthdate" tal:attributes="value param-self/birthdate"/>
+		</td>
+	</tr>
+	<tr>
+		<td><label class="label-normal">正式会員日</label></td>
+		<td>
+			<span tal:content="self/formalizedDatetime">2006/06/01 12:34:56</span>
+			<input type="hidden" name="formalizedDatetime" tal:attributes="value self/formalizedDatetime"/>
+		</td>
+	</tr>
+	<tr>
+		<td><label class="label-normal">最終ログイン日時</label></td>
+		<td>
+			<span tal:content="self/latestLoginDatetime">2007/07/02 23:56:12</span>
+			<input type="hidden" name="latestLoginDatetime" tal:attributes="value self/latestLoginDatetime"/>
+		</td>
+	</tr>
+	<tr>
+		<td><label class="label-normal">更新日時</label></td>
+		<td>
+			<span tal:content="self/updateDatetime">2007/07/02 23:56:12</span>
+			<input type="hidden" name="updateDatetime" tal:attributes="value self/updateDatetime"/>
+		</td>
+	</tr>
+</table>
+
+<input type="hidden" name="versionNo" tal:attributes="value self/versionNo"/>
+<span tal:condition="self/updated">
+<input type="submit" value="再検索" name="research" />&nbsp;
+</span>
+<input type="submit" value="確認" name="confirm" tal:attributes="disabled self/updated" disabled="false"/>&nbsp;
+<input type="submit" value="戻る" name="back" />
+</form>
+</body>
+</html>

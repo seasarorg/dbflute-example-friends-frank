@@ -1,0 +1,5 @@
+#Sat Nov 03 18:04:38 JST 2007
+baseDir=/dbflute-teeda-example/target/test-classes/data
+dbPortNo=9093
+eclipse.preferences.version=1
+webPortNo=8083

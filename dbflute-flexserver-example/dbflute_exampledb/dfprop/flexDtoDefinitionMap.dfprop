@@ -1,0 +1,22 @@
+map:{
+	; outputDirectory = ../../../../dbflute-flexclient-example/src/main/flex
+	; baseDtoPackage = com.example.dbflute.flex.dbflute.dto.bs
+	; extendedDtoPackage = com.example.dbflute.flex.dbflute.dto
+	; baseDtoPrefix = Bs
+	; baseDtoSuffix = Dto
+	; extendedDtoPrefix = 
+	; extendedDtoSuffix = Dto
+	; javaToFlexNativeMap = map:{ Integer = String ; Long = String }
+
+	# /- - - - - - - - - - - - - - - - - - - - - - -
+	# Does add 'Bindable' attribute to DTO classes?
+	# - - - - - - - - - -/
+	; bindable = true
+	# ; bindableTableTargetList = list:{ prefix:XX_ }
+	# ; bindableTableExceptList = list:{ prefix:YY_ }
+
+	# /- - - - - - - - - - - - - - - - - - - - - - - - - -
+	# Does extended classes override when you re-generate?
+	# - - - - - - - - - -/
+	# ; overrideExtended = true
+}

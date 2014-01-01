@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>会員一覧</title>
+<script language="JavaScript" src="../../js/jquery.js"></script>
+<!-- Styles should be defined on CSS files but here not because this is a mere example. -->
+<style type="text/css">
+.highlight-true {
+	background-color: #DDDDDD;
+}
+</style>
+</head>
+<body>
+<form name="conditionForm" action="./list.html" method="post">
+<ul tal:condition="notes">
+  <li tal:repeat="note notes/notes" tal:content="note/%value">MESSAGE</li>
+</ul>
+
+<table border="1">
+	<tr>
+		<td><label>会員名 (%abc%)</label></td>
+		<td><input type="text" name="memberName" tal:attributes="value self/memberName" /></td>
+	</tr>
+	<tr>
+		<td><label>購入商品名 (%abc%)</label></td>
+		<td><input type="text" name="purchaseProductName" tal:attributes="value self/purchaseProductName" /></td>
+	</tr>
+	<tr>
+		<td><label>会員ステータス</label></td>
+		<td>
+			<select name="memberStatusCodeSelect.value">
+			    <option value="" /> 
+				<option tal:repeat="option self/memberStatusCodeSelect/options"
+				        tal:attributes="value option/value; selected option/selected"
+				        tal:content="option/content" value="ABC" selected>ハイキック会員</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>未払い購入</td>
+		<td>
+			<label tal:repeat="candidate self/unpaidSelector/candidates">
+				<input type="radio" name="unpaidSelector.selectedValues" tal:attributes="checked candidate/selected; value candidate/value" />
+				<span tal:replace="candidate/name">払ってない？</span>
+			</label>
+		</td>
+	</tr>
+	<tr>
+		<td><label>正式会員日 (yyyy/MM/dd)</label></td>
+		<td>
+			<input type="text" name="formalizedDateFrom" tal:attributes="value param-self/formalizedDateFrom" />
+		           ～
+		    <input type="text" name="formalizedDateTo" tal:attributes="value param-self/formalizedDateTo" />
+		</td>
+	</tr>
+</table>
+<input type="submit" name="search" value="検索"/>
+<hr />
+
+<div tal:replace="structure include-body:/included/pagingNavi.html">{Paging Navigation}</div>
+
+<table border="1">
+	<thead>
+		<tr>
+			<th>会員ID</th>
+			<th>会員名</th>
+			<th>会員ステータス</th>
+			<th>正式会員日時</th>
+			<th>会員更新日時</th>
+			<th>編集</th>
+			<th>購入履歴</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr tal:repeat="member self/memberItems" tal:attributes="class string:highlight-${repeat/member/odd}">
+			<td tal:content="member/memberId">111</td>
+			<td tal:content="member/memberName">ミルコクロコップ</td>
+			<td tal:content="member/memberStatusName">ハイキック会員</td>
+			<td tal:content="member/formalizedDatetime/yyyy%MM%dd HH:mm:dd">2007/11/11 12:34:56</td>
+			<td tal:content="member/updateDatetime/yyyy%MM%dd HH:mm:dd">2007/12/12 21:21:21</td>
+			<td>
+				<a tal:condition="member/editable"
+				   tal:attributes="href page:./list.html?edit=&selectedId=${member/memberId}"
+				   href="../edit/input.html?memberId=3">編集</a>
+				<span tal:condition="not:member/editable">編集不可</span>
+			</td>
+			<td>
+				<a tal:condition="member/purchaseLinkVisible"
+				   tal:attributes="href page:../purchase/list.html?memberId=${member/memberId}"
+				   href="../purchase/list.html?memberId=3">購入履歴</a>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<!--
+[repeat variables]
+repeat/foo/index : The loop index(zero origin).
+repeat/foo/even  : If the loop index is even number, it returns 'true'.
+repeat/foo/odd   : If the loop index is odd number, it returns 'true'.
+repeat/foo/start : If the loop is first, it returns 'true'.
+repeat/foo/end   : If the loop is end, it returns 'true'.
+ -->
+<div tal:replace="structure include-body:/included/pagingNavi.html">{Paging Navigation}</div>
+
+</form>
+</body>
+</html>

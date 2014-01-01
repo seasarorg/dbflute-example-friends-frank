@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>会員編集：確認</title>
+</head>
+<body>
+<form method="post" tal:attributes="action page:/member/edit/confirm.html" tal:define="input self/inputForm" action="#">
+<ul tal:condition="notes">
+  <li tal:repeat="note notes/notes" tal:content="note/%value">MESSAGE</li>
+</ul>
+
+<table>
+	<tr>
+		<td>会員ID</td>
+		<td>
+			<span tal:content="input/memberId">3</span>
+		</td>
+	</tr>
+	<tr>
+		<td>会員名</td>
+		<td>
+			<span tal:content="input/memberName">Mirko Crocop</span>
+		</td>
+	</tr>
+	<tr>
+		<td>会員アカウント</td>
+		<td>
+			<span tal:content="input/memberAccount">mirko</span>
+		</td>
+	</tr>
+	<tr>
+		<td>会員ステータス</td>
+		<td>
+			<span tal:content="self/memberStatusName">HighKick会員</span>
+		</td>
+	</tr>
+	<tr>
+		<td>生年月日</td>
+		<td>
+			<span tal:content="input/birthdate">1974/09/10</span>
+		</td>
+	</tr>
+</table>
+
+<input tal:attributes="name token/name; value token/value" type="hidden" />
+<input type="submit" value="更新" name="update" />&nbsp;
+<input type="submit" value="戻る" name="back" />
+</form>
+</body>
+</html>

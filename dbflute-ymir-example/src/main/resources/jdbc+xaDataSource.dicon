@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
+  "http://www.seasar.org/dtd/components24.dtd">
+<components namespace="jdbc">
+  <component name="xaDataSource" class="org.seasar.extension.dbcp.impl.XADataSourceImpl">
+    <property name="driverClassName">"org.h2.Driver"</property>
+    <property name="URL">
+	"jdbc:h2:file:"
+	+ @org.seasar.framework.util.ResourceUtil@getBuildDir(@com.example.dbflute.ymir.dbflute.allcommon.DBCurrent@class).getCanonicalPath()
+	+ "/exampledb/exampledb"
+    </property>
+    <property name="user">"sa"</property>
+    <property name="password">""</property>
+  </component>
+</components>

@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+.pagingnavi div {
+	display:inline;
+	padding: 3px;
+}
+
+div.result {
+	padding: 5px;
+}
+div.result table {
+	border: 1px solid #999;
+	border-collapse: collapse;
+}
+div.result th, div.result td {
+	border: 1px solid #999;
+	padding: 5px;
+}
+div.result th {
+	background-color: #c0c6c9;
+}
