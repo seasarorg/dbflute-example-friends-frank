@@ -145,8 +145,8 @@ public abstract class AbstractBsSummaryProductCQ extends AbstractConditionQuery 
      */
     public void setProductId_IsNotNull() { regProductId(CK_ISNN, DOBJ); }
 
-    protected void regProductId(ConditionKey k, Object v) { regQ(k, v, getCValueProductId(), "PRODUCT_ID"); }
-    abstract protected ConditionValue getCValueProductId();
+    protected void regProductId(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueProductId(), "PRODUCT_ID"); }
+    protected abstract ConditionValue getCValueProductId();
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
@@ -236,8 +236,8 @@ public abstract class AbstractBsSummaryProductCQ extends AbstractConditionQuery 
      */
     public void setProductName_IsNotNull() { regProductName(CK_ISNN, DOBJ); }
 
-    protected void regProductName(ConditionKey k, Object v) { regQ(k, v, getCValueProductName(), "PRODUCT_NAME"); }
-    abstract protected ConditionValue getCValueProductName();
+    protected void regProductName(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueProductName(), "PRODUCT_NAME"); }
+    protected abstract ConditionValue getCValueProductName();
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
@@ -327,8 +327,8 @@ public abstract class AbstractBsSummaryProductCQ extends AbstractConditionQuery 
      */
     public void setProductHandleCode_IsNotNull() { regProductHandleCode(CK_ISNN, DOBJ); }
 
-    protected void regProductHandleCode(ConditionKey k, Object v) { regQ(k, v, getCValueProductHandleCode(), "PRODUCT_HANDLE_CODE"); }
-    abstract protected ConditionValue getCValueProductHandleCode();
+    protected void regProductHandleCode(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueProductHandleCode(), "PRODUCT_HANDLE_CODE"); }
+    protected abstract ConditionValue getCValueProductHandleCode();
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
@@ -418,8 +418,8 @@ public abstract class AbstractBsSummaryProductCQ extends AbstractConditionQuery 
      */
     public void setProductStatusCode_IsNotNull() { regProductStatusCode(CK_ISNN, DOBJ); }
 
-    protected void regProductStatusCode(ConditionKey k, Object v) { regQ(k, v, getCValueProductStatusCode(), "PRODUCT_STATUS_CODE"); }
-    abstract protected ConditionValue getCValueProductStatusCode();
+    protected void regProductStatusCode(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueProductStatusCode(), "PRODUCT_STATUS_CODE"); }
+    protected abstract ConditionValue getCValueProductStatusCode();
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br />
@@ -475,7 +475,7 @@ public abstract class AbstractBsSummaryProductCQ extends AbstractConditionQuery 
      * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of latestPurchaseDatetime. (NullAllowed: if null, no to-condition)
      * @param fromToOption The option of from-to. (NotNull)
      */
-    public void setLatestPurchaseDatetime_FromTo(java.util.Date fromDatetime, java.util.Date toDatetime, FromToOption fromToOption) {
+    public void setLatestPurchaseDatetime_FromTo(Date fromDatetime, Date toDatetime, FromToOption fromToOption) {
         regFTQ((fromDatetime != null ? new java.sql.Timestamp(fromDatetime.getTime()) : null), (toDatetime != null ? new java.sql.Timestamp(toDatetime.getTime()) : null), getCValueLatestPurchaseDatetime(), "LATEST_PURCHASE_DATETIME", fromToOption);
     }
 
@@ -490,7 +490,7 @@ public abstract class AbstractBsSummaryProductCQ extends AbstractConditionQuery 
      * @param fromDate The from-date(yyyy/MM/dd) of latestPurchaseDatetime. (NullAllowed: if null, no from-condition)
      * @param toDate The to-date(yyyy/MM/dd) of latestPurchaseDatetime. (NullAllowed: if null, no to-condition)
      */
-    public void setLatestPurchaseDatetime_DateFromTo(java.util.Date fromDate, java.util.Date toDate) {
+    public void setLatestPurchaseDatetime_DateFromTo(Date fromDate, Date toDate) {
         setLatestPurchaseDatetime_FromTo(fromDate, toDate, new FromToOption().compareAsDate());
     }
 
@@ -532,8 +532,8 @@ public abstract class AbstractBsSummaryProductCQ extends AbstractConditionQuery 
      */
     public void setLatestPurchaseDatetime_IsNotNull() { regLatestPurchaseDatetime(CK_ISNN, DOBJ); }
 
-    protected void regLatestPurchaseDatetime(ConditionKey k, Object v) { regQ(k, v, getCValueLatestPurchaseDatetime(), "LATEST_PURCHASE_DATETIME"); }
-    abstract protected ConditionValue getCValueLatestPurchaseDatetime();
+    protected void regLatestPurchaseDatetime(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueLatestPurchaseDatetime(), "LATEST_PURCHASE_DATETIME"); }
+    protected abstract ConditionValue getCValueLatestPurchaseDatetime();
 
     // ===================================================================================
     //                                                                       Very Internal
