@@ -205,21 +205,19 @@ map:{
     #   o extendsPropRequest: other request name of exnteds-properties (NotRequired)
     #   o isCheckImplicitOverride: does it check implicit override? (NotRequired)
     #
-    #; propertiesHtmlMap = map:{
-    #    ; ApplicationProperties = map:{
-    #        ; baseDir = ../src
-    #        ; rootFile = $$baseDir$$/main/resources/application_ja.properties
-    #        ; environmentMap = map:{
-    #            ; integration = $$baseDir$$/integration/resources
-    #            ; production = $$baseDir$$/production/resources
-    #        }
-    #        ; diffIgnoredKeyList = list:{}
-    #        ; maskedKeyList = list:{}
-    #        ; isEnvOnlyFloatLeft = false
-    #        ; extendsPropRequest = null
-    #        ; isCheckImplicitOverride = false
-    #    }
-    #}
+    ; propertiesHtmlMap = map:{
+        ; ApplicationProperties = map:{
+            ; baseDir = ../src
+            ; rootFile = $$baseDir$$/main/resources/application_ja.properties
+            ; environmentMap = map:{
+            }
+            ; diffIgnoredKeyList = list:{}
+            ; maskedKeyList = list:{}
+            ; isEnvOnlyFloatLeft = false
+            ; extendsPropRequest = null
+            ; isCheckImplicitOverride = false
+        }
+    }
     # - - - - - - - - - -/
 }
 # ----------------/
