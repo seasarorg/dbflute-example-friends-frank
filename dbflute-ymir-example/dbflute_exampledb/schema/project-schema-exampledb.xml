@@ -4,7 +4,7 @@
 <database name="PUBLIC">
     <table name="MEMBER" schema="EXAMPLEDB.PUBLIC" type="TABLE">
         <column autoIncrement="true" comment="" dbType="INTEGER"
-            default="NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_834CB0F6_513B_4C4E_8008_817D8E759018"
+            default="NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_791F3CFE_B8BD_4950_A5D6_5518209FFD0B"
             javaType="Integer" name="MEMBER_ID" pkName="CONSTRAINT_8"
             primaryKey="true" required="true" size="10" type="INTEGER"/>
         <column comment="" dbType="VARCHAR" javaType="String"
@@ -49,7 +49,7 @@
     </table>
     <table name="MEMBER_ADDRESS" schema="EXAMPLEDB.PUBLIC" type="TABLE">
         <column autoIncrement="true" comment="" dbType="INTEGER"
-            default="NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_408DD197_76F6_4181_B449_C06411708804"
+            default="NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_ADDA4284_BF94_4DD3_AAA9_C4C3A6DFCA33"
             javaType="Integer" name="MEMBER_ADDRESS_ID"
             pkName="CONSTRAINT_B" primaryKey="true" required="true"
             size="10" type="INTEGER"/>
@@ -96,7 +96,7 @@
     </table>
     <table name="MEMBER_LOGIN" schema="EXAMPLEDB.PUBLIC" type="TABLE">
         <column autoIncrement="true" comment="" dbType="BIGINT"
-            default="NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_9B592DCB_588A_4B64_84B2_E9D4B19B847C"
+            default="NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_2839A45F_E0BB_4091_8669_491759DD0CAF"
             javaType="Long" name="MEMBER_LOGIN_ID"
             pkName="CONSTRAINT_BD" primaryKey="true" required="true"
             size="19" type="BIGINT"/>
@@ -162,7 +162,7 @@
     </table>
     <table name="MEMBER_SERVICE" schema="EXAMPLEDB.PUBLIC" type="TABLE">
         <column autoIncrement="true" comment="" dbType="INTEGER"
-            default="NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_29F2D5C6_1A38_4D81_80CD_9D3C58DC8EAF"
+            default="NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_84235DE0_3014_4316_93E3_A74049710B6C"
             javaType="Integer" name="MEMBER_SERVICE_ID"
             pkName="CONSTRAINT_6F" primaryKey="true" required="true"
             size="10" type="INTEGER"/>
@@ -256,7 +256,7 @@
     </table>
     <table name="PRODUCT" schema="EXAMPLEDB.PUBLIC" type="TABLE">
         <column autoIncrement="true" comment="" dbType="INTEGER"
-            default="NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_9C0F33D6_68F6_4595_8547_8EB297912E5C"
+            default="NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_6983E995_82E6_46D3_9BBC_62DCAF0D5A6D"
             javaType="Integer" name="PRODUCT_ID" pkName="CONSTRAINT_1"
             primaryKey="true" required="true" size="10" type="INTEGER"/>
         <column comment="" dbType="VARCHAR" javaType="String"
@@ -332,7 +332,7 @@
     </table>
     <table name="PURCHASE" schema="EXAMPLEDB.PUBLIC" type="TABLE">
         <column autoIncrement="true" comment="" dbType="BIGINT"
-            default="NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_526F87FC_DBB5_47F5_9202_EB300F0FBCCE"
+            default="NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_5B5017FE_B7A0_4D3E_8E2F_D8501A650DF9"
             javaType="Long" name="PURCHASE_ID" pkName="CONSTRAINT_9"
             primaryKey="true" required="true" size="19" type="BIGINT"/>
         <column comment="" dbType="INTEGER" javaType="Integer"
@@ -432,16 +432,16 @@
     </table>
     <sequenceGroup>
         <sequence incrementSize="1"
-            name="SYSTEM_SEQUENCE_408DD197_76F6_4181_B449_C06411708804" schema="EXAMPLEDB.PUBLIC"/>
+            name="SYSTEM_SEQUENCE_2839A45F_E0BB_4091_8669_491759DD0CAF" schema="EXAMPLEDB.PUBLIC"/>
         <sequence incrementSize="1"
-            name="SYSTEM_SEQUENCE_526F87FC_DBB5_47F5_9202_EB300F0FBCCE" schema="EXAMPLEDB.PUBLIC"/>
+            name="SYSTEM_SEQUENCE_6983E995_82E6_46D3_9BBC_62DCAF0D5A6D" schema="EXAMPLEDB.PUBLIC"/>
         <sequence incrementSize="1"
-            name="SYSTEM_SEQUENCE_834CB0F6_513B_4C4E_8008_817D8E759018" schema="EXAMPLEDB.PUBLIC"/>
+            name="SYSTEM_SEQUENCE_84235DE0_3014_4316_93E3_A74049710B6C" schema="EXAMPLEDB.PUBLIC"/>
         <sequence incrementSize="1"
-            name="SYSTEM_SEQUENCE_9B592DCB_588A_4B64_84B2_E9D4B19B847C" schema="EXAMPLEDB.PUBLIC"/>
+            name="SYSTEM_SEQUENCE_5B5017FE_B7A0_4D3E_8E2F_D8501A650DF9" schema="EXAMPLEDB.PUBLIC"/>
         <sequence incrementSize="1"
-            name="SYSTEM_SEQUENCE_9C0F33D6_68F6_4595_8547_8EB297912E5C" schema="EXAMPLEDB.PUBLIC"/>
+            name="SYSTEM_SEQUENCE_ADDA4284_BF94_4DD3_AAA9_C4C3A6DFCA33" schema="EXAMPLEDB.PUBLIC"/>
         <sequence incrementSize="1"
-            name="SYSTEM_SEQUENCE_29F2D5C6_1A38_4D81_80CD_9D3C58DC8EAF" schema="EXAMPLEDB.PUBLIC"/>
+            name="SYSTEM_SEQUENCE_791F3CFE_B8BD_4950_A5D6_5518209FFD0B" schema="EXAMPLEDB.PUBLIC"/>
     </sequenceGroup>
 </database>
