@@ -21,13 +21,13 @@ import com.example.dbflute.flex.simpleflute.dto.MemberSecurityDto;
 import com.example.dbflute.flex.simpleflute.dto.MemberStatusDto;
 import com.example.dbflute.flex.simpleflute.dto.MemberWithdrawalDto;
 import com.example.dbflute.flex.simpleflute.dto.PurchaseDto;
-import com.example.dbflute.flex.unit.AppContainerTestCase;
+import com.example.dbflute.flex.unit.UnitContainerTestCase;
 
 /**
  * @author jflute
  * @since 0.9.7.7 (2010/12/06 Tuesday)
  */
-public class WxSimpleDtoMapperTest extends AppContainerTestCase {
+public class WxSimpleDtoMapperTest extends UnitContainerTestCase {
 
     // ===================================================================================
     //                                                                           Attribute

@@ -5,4 +5,5 @@
 	<include path="convention.dicon"/>
 	<include path="aop.dicon"/>
 	<include path="dbflute.dicon"/>
+	<include path="projectfw.dicon"/>
 </components>
