@@ -56,13 +56,13 @@ public abstract class BsPurchaseDto implements Serializable {
     /** PURCHASE_ID: {PK, ID, NotNull, BIGINT(19)} */
     protected Long _purchaseId;
 
-    /** MEMBER_ID: {UQ, IX, NotNull, INTEGER(10), FK to MEMBER} */
+    /** MEMBER_ID: {UQ+, IX+, NotNull, INTEGER(10), FK to MEMBER} */
     protected Integer _memberId;
 
-    /** PRODUCT_ID: {UQ+, IX, NotNull, INTEGER(10), FK to PRODUCT} */
+    /** PRODUCT_ID: {+UQ, IX+, NotNull, INTEGER(10), FK to PRODUCT} */
     protected Integer _productId;
 
-    /** PURCHASE_DATETIME: {UQ+, IX, NotNull, TIMESTAMP(23, 10)} */
+    /** PURCHASE_DATETIME: {+UQ, IX+, NotNull, TIMESTAMP(23, 10)} */
     protected java.sql.Timestamp _purchaseDatetime;
 
     /** PURCHASE_COUNT: {NotNull, INTEGER(10)} */
@@ -215,7 +215,7 @@ public abstract class BsPurchaseDto implements Serializable {
     }
 
     /**
-     * [get] MEMBER_ID: {UQ, IX, NotNull, INTEGER(10), FK to MEMBER} <br />
+     * [get] MEMBER_ID: {UQ+, IX+, NotNull, INTEGER(10), FK to MEMBER} <br />
      * 会員ID: 会員を参照するID。<br />
      * 購入を識別する自然キー（複合ユニーク制約）の筆頭要素。
      * @return The value of the column 'MEMBER_ID'. (NullAllowed)
@@ -225,7 +225,7 @@ public abstract class BsPurchaseDto implements Serializable {
     }
 
     /**
-     * [set] MEMBER_ID: {UQ, IX, NotNull, INTEGER(10), FK to MEMBER} <br />
+     * [set] MEMBER_ID: {UQ+, IX+, NotNull, INTEGER(10), FK to MEMBER} <br />
      * 会員ID: 会員を参照するID。<br />
      * 購入を識別する自然キー（複合ユニーク制約）の筆頭要素。
      * @param memberId The value of the column 'MEMBER_ID'. (NullAllowed)
@@ -236,7 +236,7 @@ public abstract class BsPurchaseDto implements Serializable {
     }
 
     /**
-     * [get] PRODUCT_ID: {UQ+, IX, NotNull, INTEGER(10), FK to PRODUCT} <br />
+     * [get] PRODUCT_ID: {+UQ, IX+, NotNull, INTEGER(10), FK to PRODUCT} <br />
      * 商品ID: 商品を参照するID。
      * @return The value of the column 'PRODUCT_ID'. (NullAllowed)
      */
@@ -245,7 +245,7 @@ public abstract class BsPurchaseDto implements Serializable {
     }
 
     /**
-     * [set] PRODUCT_ID: {UQ+, IX, NotNull, INTEGER(10), FK to PRODUCT} <br />
+     * [set] PRODUCT_ID: {+UQ, IX+, NotNull, INTEGER(10), FK to PRODUCT} <br />
      * 商品ID: 商品を参照するID。
      * @param productId The value of the column 'PRODUCT_ID'. (NullAllowed)
      */
@@ -255,7 +255,7 @@ public abstract class BsPurchaseDto implements Serializable {
     }
 
     /**
-     * [get] PURCHASE_DATETIME: {UQ+, IX, NotNull, TIMESTAMP(23, 10)} <br />
+     * [get] PURCHASE_DATETIME: {+UQ, IX+, NotNull, TIMESTAMP(23, 10)} <br />
      * 購入日時: 購入した瞬間の日時。
      * @return The value of the column 'PURCHASE_DATETIME'. (NullAllowed)
      */
@@ -264,7 +264,7 @@ public abstract class BsPurchaseDto implements Serializable {
     }
 
     /**
-     * [set] PURCHASE_DATETIME: {UQ+, IX, NotNull, TIMESTAMP(23, 10)} <br />
+     * [set] PURCHASE_DATETIME: {+UQ, IX+, NotNull, TIMESTAMP(23, 10)} <br />
      * 購入日時: 購入した瞬間の日時。
      * @param purchaseDatetime The value of the column 'PURCHASE_DATETIME'. (NullAllowed)
      */

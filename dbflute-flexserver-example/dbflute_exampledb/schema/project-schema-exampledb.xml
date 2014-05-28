@@ -4,11 +4,11 @@
 <database name="PUBLIC">
     <table
         comment="会員: 会員登録時にデータが登録される。基本的に物理削除はなく、退会したらステータスが退会会員になる。ライフサイクルやカテゴリの違う会員それぞれの詳細情報は、別途 one-to-one のテーブルに。"
-        name="MEMBER" schema="EXAMPLEDB.PUBLIC" type="TABLE">
+        name="MEMBER" schema="EXAMPLEDB_MASTER.PUBLIC" type="TABLE">
         <column autoIncrement="true"
             comment="会員ID: 会員を識別するID。連番として自動採番される。&#xa;（会員IDだけに限らず）採番方法はDBMS次第。"
             dbType="INTEGER"
-            default="NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_751AC056_8D16_4670_9384_7FA5A4690656"
+            default="NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_AAA26AAA_8F76_4F24_B5CE_565A102879B3"
             javaType="Integer" name="MEMBER_ID" pkName="CONSTRAINT_8"
             primaryKey="true" required="true" size="10" type="INTEGER"/>
         <column
@@ -48,7 +48,7 @@
             comment="バージョンNO: レコードのバージョンを示すNO。&#xa;更新回数と等しく、主に排他制御のために利用される。"
             dbType="BIGINT" javaType="Long" name="VERSION_NO"
             required="true" size="19" type="BIGINT"/>
-        <foreign-key foreignSchema="EXAMPLEDB.PUBLIC"
+        <foreign-key foreignSchema="EXAMPLEDB_MASTER.PUBLIC"
             foreignTable="MEMBER_STATUS" name="FK_MEMBER_MEMBER_STATUS">
             <reference foreign="MEMBER_STATUS_CODE" local="MEMBER_STATUS_CODE"/>
         </foreign-key>
@@ -67,11 +67,11 @@
     </table>
     <table
         comment="会員住所情報: 会員の住所に関する情報で、同時に有効期間ごとに履歴管理されている。&#xa;会員を基点に考えた場合、構造的にはone-to-many だが、業務的な定型条件でone-to-one になる。このような構造を「業務的one-to-one」と呼ぶ。&#xa;有効期間は隙間なく埋められるが、ここでは住所情報のない会員も存在し、厳密には(業務的な) &quot;1 : 0...1&quot; である。"
-        name="MEMBER_ADDRESS" schema="EXAMPLEDB.PUBLIC" type="TABLE">
+        name="MEMBER_ADDRESS" schema="EXAMPLEDB_MASTER.PUBLIC" type="TABLE">
         <column autoIncrement="true"
             comment="会員住所ID: 会員住所を識別するID。&#xa;履歴分も含むテーブルなので、これ自体はFKではない。"
             dbType="INTEGER"
-            default="NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_AF7B3A0E_13BA_401B_B391_74E89AA367EE"
+            default="NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_F4B3F9CB_D633_403B_B4A0_158F814DB6A3"
             javaType="Integer" name="MEMBER_ADDRESS_ID"
             pkName="CONSTRAINT_B" primaryKey="true" required="true"
             size="10" type="INTEGER"/>
@@ -105,11 +105,11 @@
             name="UPDATE_USER" required="true" size="200" type="VARCHAR"/>
         <column comment="" dbType="BIGINT" javaType="Long"
             name="VERSION_NO" required="true" size="19" type="BIGINT"/>
-        <foreign-key foreignSchema="EXAMPLEDB.PUBLIC"
+        <foreign-key foreignSchema="EXAMPLEDB_MASTER.PUBLIC"
             foreignTable="MEMBER" name="FK_MEMBER_ADDRESS_MEMBER">
             <reference foreign="MEMBER_ID" local="MEMBER_ID"/>
         </foreign-key>
-        <foreign-key foreignSchema="EXAMPLEDB.PUBLIC"
+        <foreign-key foreignSchema="EXAMPLEDB_MASTER.PUBLIC"
             foreignTable="REGION" name="FK_MEMBER_ADDRESS_REGION">
             <reference foreign="REGION_ID" local="REGION_ID"/>
         </foreign-key>
@@ -126,10 +126,10 @@
     </table>
     <table
         comment="会員ログイン: ログインするたびに登録されるログイン履歴。&#xa;登録されたら更新されるも削除されることもない。さらには登録する人もプログラムもはっきりしているので、ここでは共通カラムは(紙面の都合上もあって)省略している。"
-        name="MEMBER_LOGIN" schema="EXAMPLEDB.PUBLIC" type="TABLE">
+        name="MEMBER_LOGIN" schema="EXAMPLEDB_MASTER.PUBLIC" type="TABLE">
         <column autoIncrement="true" comment="会員ログインID: "
             dbType="BIGINT"
-            default="NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_789C8072_C6C8_4326_A57B_FAEBEB2918BD"
+            default="NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_FD0A76F9_26F8_4F2E_8672_0F0E7D959503"
             javaType="Long" name="MEMBER_LOGIN_ID"
             pkName="CONSTRAINT_BD" primaryKey="true" required="true"
             size="19" type="BIGINT"/>
@@ -144,11 +144,11 @@
         <column comment="ログイン会員ステータスコード: ログイン時の会員ステータス" dbType="CHAR"
             javaType="String" name="LOGIN_MEMBER_STATUS_CODE"
             required="true" size="3" type="CHAR"/>
-        <foreign-key foreignSchema="EXAMPLEDB.PUBLIC"
+        <foreign-key foreignSchema="EXAMPLEDB_MASTER.PUBLIC"
             foreignTable="MEMBER" name="FK_MEMBER_LOGIN_MEMBER">
             <reference foreign="MEMBER_ID" local="MEMBER_ID"/>
         </foreign-key>
-        <foreign-key foreignSchema="EXAMPLEDB.PUBLIC"
+        <foreign-key foreignSchema="EXAMPLEDB_MASTER.PUBLIC"
             foreignTable="MEMBER_STATUS" name="FK_MEMBER_LOGIN_MEMBER_STATUS">
             <reference foreign="MEMBER_STATUS_CODE" local="LOGIN_MEMBER_STATUS_CODE"/>
         </foreign-key>
@@ -168,7 +168,7 @@
     </table>
     <table
         comment="会員セキュリティ情報: 会員とは one-to-one で、会員一人につき必ず一つのセキュリティ情報がある"
-        name="MEMBER_SECURITY" schema="EXAMPLEDB.PUBLIC" type="TABLE">
+        name="MEMBER_SECURITY" schema="EXAMPLEDB_MASTER.PUBLIC" type="TABLE">
         <column comment="会員ID: そのまま one-to-one を構成するためのFKとなる。"
             dbType="INTEGER" javaType="Integer" name="MEMBER_ID"
             pkName="CONSTRAINT_6" primaryKey="true" required="true"
@@ -199,18 +199,18 @@
             name="UPDATE_USER" required="true" size="200" type="VARCHAR"/>
         <column comment="" dbType="BIGINT" javaType="Long"
             name="VERSION_NO" required="true" size="19" type="BIGINT"/>
-        <foreign-key foreignSchema="EXAMPLEDB.PUBLIC"
+        <foreign-key foreignSchema="EXAMPLEDB_MASTER.PUBLIC"
             foreignTable="MEMBER" name="FK_MEMBER_SECURITY_MEMBER">
             <reference foreign="MEMBER_ID" local="MEMBER_ID"/>
         </foreign-key>
     </table>
     <table
         comment="会員サービス: 会員のサービス情報（ポイントサービスなど）。&#xa;ExampleDBとして、あえて統一性を崩してユニーク制約経由の one-to-one を表現している。"
-        name="MEMBER_SERVICE" schema="EXAMPLEDB.PUBLIC" type="TABLE">
+        name="MEMBER_SERVICE" schema="EXAMPLEDB_MASTER.PUBLIC" type="TABLE">
         <column autoIncrement="true"
             comment="会員サービスID: 独立した主キーとなるが、実質的に会員IDとは one-to-one である。"
             dbType="INTEGER"
-            default="NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_0E1D006E_5410_467A_B6C7_2CBBA7C5EC2D"
+            default="NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_EBBE1EFC_97CF_4F70_9AEA_C4A36CD694E0"
             javaType="Integer" name="MEMBER_SERVICE_ID"
             pkName="CONSTRAINT_6F" primaryKey="true" required="true"
             size="10" type="INTEGER"/>
@@ -237,11 +237,11 @@
             name="UPDATE_USER" required="true" size="200" type="VARCHAR"/>
         <column comment="" dbType="BIGINT" javaType="Long"
             name="VERSION_NO" required="true" size="19" type="BIGINT"/>
-        <foreign-key foreignSchema="EXAMPLEDB.PUBLIC"
+        <foreign-key foreignSchema="EXAMPLEDB_MASTER.PUBLIC"
             foreignTable="MEMBER" name="FK_MEMBER_SERVICE_MEMBER">
             <reference foreign="MEMBER_ID" local="MEMBER_ID"/>
         </foreign-key>
-        <foreign-key foreignSchema="EXAMPLEDB.PUBLIC"
+        <foreign-key foreignSchema="EXAMPLEDB_MASTER.PUBLIC"
             foreignTable="SERVICE_RANK" name="FK_MEMBER_SERVICE_SERVICE_RANK_CODE">
             <reference foreign="SERVICE_RANK_CODE" local="SERVICE_RANK_CODE"/>
         </foreign-key>
@@ -260,7 +260,7 @@
     </table>
     <table
         comment="会員ステータス: 会員のステータスを示す固定的なマスタテーブル。&#xa;業務で増えることはなく、増減するときは実装もともなうレベルの業務変更と考えられる。&#xa;&#xa;こういった固定的なマスタテーブルには、更新日時などの共通カラムは定義していないが、業務上そういった情報を管理する必要性が低いという理由に加え、ExampleDBとして共通カラムでER図が埋め尽くされてしまい見づらくなるという&#xa;ところで割り切っている。実業務では統一的に定義することもある。"
-        name="MEMBER_STATUS" schema="EXAMPLEDB.PUBLIC" type="TABLE">
+        name="MEMBER_STATUS" schema="EXAMPLEDB_MASTER.PUBLIC" type="TABLE">
         <column
             comment="会員ステータスコード: 会員ステータスを識別するコード。&#xa;固定的なデータなので、連番とか番号にはせず、&#xa;データを直接見たときも人が直感的にわかるように、&#xa;このような３桁のコード形式にしている。&#xa;"
             dbType="CHAR" javaType="String" name="MEMBER_STATUS_CODE"
@@ -282,7 +282,7 @@
     </table>
     <table
         comment="会員退会情報: 退会会員の退会に関する詳細な情報。&#xa;退会会員のみデータが存在する。（&quot;1 : 0...1&quot; のパターンの one-to-one）&#xa;共通カラムがあってバージョンNOがないパターン。基本的に更新が入ることはないが、登録ユーザを保持したいのと、重要なデータなので更新系の情報も。"
-        name="MEMBER_WITHDRAWAL" schema="EXAMPLEDB.PUBLIC" type="TABLE">
+        name="MEMBER_WITHDRAWAL" schema="EXAMPLEDB_MASTER.PUBLIC" type="TABLE">
         <column comment="" dbType="INTEGER" javaType="Integer"
             name="MEMBER_ID" pkName="CONSTRAINT_E" primaryKey="true"
             required="true" size="10" type="INTEGER"/>
@@ -310,11 +310,11 @@
             name="UPDATE_USER" required="true" size="200" type="VARCHAR"/>
         <column comment="" dbType="BIGINT" javaType="Long"
             name="VERSION_NO" required="true" size="19" type="BIGINT"/>
-        <foreign-key foreignSchema="EXAMPLEDB.PUBLIC"
+        <foreign-key foreignSchema="EXAMPLEDB_MASTER.PUBLIC"
             foreignTable="MEMBER" name="FK_MEMBER_WITHDRAWAL_MEMBER">
             <reference foreign="MEMBER_ID" local="MEMBER_ID"/>
         </foreign-key>
-        <foreign-key foreignSchema="EXAMPLEDB.PUBLIC"
+        <foreign-key foreignSchema="EXAMPLEDB_MASTER.PUBLIC"
             foreignTable="WITHDRAWAL_REASON" name="FK_MEMBER_WITHDRAWAL_WITHDRAWAL_REASON">
             <reference foreign="WITHDRAWAL_REASON_CODE" local="WITHDRAWAL_REASON_CODE"/>
         </foreign-key>
@@ -322,9 +322,10 @@
             <index-column name="WITHDRAWAL_REASON_CODE" position="1"/>
         </index>
     </table>
-    <table comment="商品: " name="PRODUCT" schema="EXAMPLEDB.PUBLIC" type="TABLE">
+    <table comment="商品: " name="PRODUCT"
+        schema="EXAMPLEDB_MASTER.PUBLIC" type="TABLE">
         <column autoIncrement="true" comment="" dbType="INTEGER"
-            default="NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_65D254F5_BE09_4070_BFF8_E486383BC887"
+            default="NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_403A981A_BF95_4766_92EF_084ED14A92D8"
             javaType="Integer" name="PRODUCT_ID" pkName="CONSTRAINT_1"
             primaryKey="true" required="true" size="10" type="INTEGER"/>
         <column
@@ -352,11 +353,11 @@
             name="UPDATE_USER" required="true" size="200" type="VARCHAR"/>
         <column comment="" dbType="BIGINT" javaType="Long"
             name="VERSION_NO" required="true" size="19" type="BIGINT"/>
-        <foreign-key foreignSchema="EXAMPLEDB.PUBLIC"
+        <foreign-key foreignSchema="EXAMPLEDB_MASTER.PUBLIC"
             foreignTable="PRODUCT_CATEGORY" name="FK_PRODUCT_PRODUCT_CATEGORY">
             <reference foreign="PRODUCT_CATEGORY_CODE" local="PRODUCT_CATEGORY_CODE"/>
         </foreign-key>
-        <foreign-key foreignSchema="EXAMPLEDB.PUBLIC"
+        <foreign-key foreignSchema="EXAMPLEDB_MASTER.PUBLIC"
             foreignTable="PRODUCT_STATUS" name="FK_PRODUCT_PRODUCT_STATUS">
             <reference foreign="PRODUCT_STATUS_CODE" local="PRODUCT_STATUS_CODE"/>
         </foreign-key>
@@ -374,7 +375,7 @@
         </index>
     </table>
     <table comment="商品カテゴリ: 商品のカテゴリを表現するマスタ。&#xa;自己参照の階層になっている。"
-        name="PRODUCT_CATEGORY" schema="EXAMPLEDB.PUBLIC" type="TABLE">
+        name="PRODUCT_CATEGORY" schema="EXAMPLEDB_MASTER.PUBLIC" type="TABLE">
         <column comment="商品カテゴリコード: " dbType="CHAR" javaType="String"
             name="PRODUCT_CATEGORY_CODE" pkName="CONSTRAINT_3"
             primaryKey="true" required="true" size="3" type="CHAR"/>
@@ -382,7 +383,7 @@
             name="PRODUCT_CATEGORY_NAME" required="true" size="50" type="VARCHAR"/>
         <column comment="親カテゴリコード: 最上位の場合はデータなし。" dbType="CHAR"
             javaType="String" name="PARENT_CATEGORY_CODE" size="3" type="CHAR"/>
-        <foreign-key foreignSchema="EXAMPLEDB.PUBLIC"
+        <foreign-key foreignSchema="EXAMPLEDB_MASTER.PUBLIC"
             foreignTable="PRODUCT_CATEGORY" name="FK_PRODUCT_CATEGORY_PARENT">
             <reference foreign="PRODUCT_CATEGORY_CODE" local="PARENT_CATEGORY_CODE"/>
         </foreign-key>
@@ -391,7 +392,7 @@
         </index>
     </table>
     <table comment="商品ステータス: 商品のステータスを表現する固定的なマスタ。"
-        name="PRODUCT_STATUS" schema="EXAMPLEDB.PUBLIC" type="TABLE">
+        name="PRODUCT_STATUS" schema="EXAMPLEDB_MASTER.PUBLIC" type="TABLE">
         <column comment="商品ステータスコード: 商品ステータスを識別するコード。" dbType="CHAR"
             javaType="String" name="PRODUCT_STATUS_CODE"
             pkName="CONSTRAINT_1B" primaryKey="true" required="true"
@@ -406,9 +407,9 @@
     </table>
     <table
         comment="購入: 一つの商品に対する購入を表現する。&#xa;実業務であれば購入詳細というテーブルを作り、「購入という行為」と「その中身（詳細）」を違う粒度のデータとしてそれぞれ管理するのが一般的と言えるでしょう。というか、注文とか請求とかそういうことを考え始めたらもっと複雑になるはずですが、ExampleDBということで割り切っています。"
-        name="PURCHASE" schema="EXAMPLEDB.PUBLIC" type="TABLE">
+        name="PURCHASE" schema="EXAMPLEDB_MASTER.PUBLIC" type="TABLE">
         <column autoIncrement="true" comment="" dbType="BIGINT"
-            default="NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_DF6103EC_5AFB_4EEC_B609_F40C16451AE8"
+            default="NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_B703111E_995D_4EC6_B73F_62DC61F24ADC"
             javaType="Long" name="PURCHASE_ID" pkName="CONSTRAINT_9"
             primaryKey="true" required="true" size="19" type="BIGINT"/>
         <column
@@ -443,11 +444,11 @@
             name="UPDATE_USER" required="true" size="200" type="VARCHAR"/>
         <column comment="" dbType="BIGINT" javaType="Long"
             name="VERSION_NO" required="true" size="19" type="BIGINT"/>
-        <foreign-key foreignSchema="EXAMPLEDB.PUBLIC"
+        <foreign-key foreignSchema="EXAMPLEDB_MASTER.PUBLIC"
             foreignTable="MEMBER" name="FK_PURCHASE_MEMBER">
             <reference foreign="MEMBER_ID" local="MEMBER_ID"/>
         </foreign-key>
-        <foreign-key foreignSchema="EXAMPLEDB.PUBLIC"
+        <foreign-key foreignSchema="EXAMPLEDB_MASTER.PUBLIC"
             foreignTable="PRODUCT" name="FK_PURCHASE_PRODUCT">
             <reference foreign="PRODUCT_ID" local="PRODUCT_ID"/>
         </foreign-key>
@@ -476,7 +477,7 @@
     </table>
     <table
         comment="地域: 主に会員の住所に対応する地域。&#xa;かなりざっくりした感じではある。&#xa;業務的one-to-oneの親テーブル。"
-        name="REGION" schema="EXAMPLEDB.PUBLIC" type="TABLE">
+        name="REGION" schema="EXAMPLEDB_MASTER.PUBLIC" type="TABLE">
         <column
             comment="地域ID: 地域を識別するID。&#xa;珍しく(固定的な)マスタテーブルとしては数値だが、&#xa;Exampleなのでやはり色々なパターンがないと。"
             dbType="INTEGER" javaType="Integer" name="REGION_ID"
@@ -487,7 +488,7 @@
             size="50" type="VARCHAR"/>
     </table>
     <table comment="サービスランク: 会員のサービスレベルを表現するランク。&#xa;（ゴールドとかプラチナとか）"
-        name="SERVICE_RANK" schema="EXAMPLEDB.PUBLIC" type="TABLE">
+        name="SERVICE_RANK" schema="EXAMPLEDB_MASTER.PUBLIC" type="TABLE">
         <column comment="サービスランクコード: サービスランクを識別するコード。" dbType="CHAR"
             javaType="String" name="SERVICE_RANK_CODE"
             pkName="CONSTRAINT_A" primaryKey="true" required="true"
@@ -513,7 +514,7 @@
             <unique-column name="DISPLAY_ORDER" position="1"/>
         </unique>
     </table>
-    <table name="SUMMARY_PRODUCT" schema="EXAMPLEDB.PUBLIC" type="VIEW">
+    <table name="SUMMARY_PRODUCT" schema="EXAMPLEDB_MASTER.PUBLIC" type="VIEW">
         <column comment="" dbType="INTEGER" javaType="Integer"
             name="PRODUCT_ID" size="10" type="INTEGER"/>
         <column comment="" dbType="VARCHAR" javaType="String"
@@ -526,7 +527,7 @@
             javaType="java.sql.Timestamp"
             name="LATEST_PURCHASE_DATETIME" size="23, 10" type="TIMESTAMP"/>
     </table>
-    <table name="SUMMARY_WITHDRAWAL" schema="EXAMPLEDB.PUBLIC" type="VIEW">
+    <table name="SUMMARY_WITHDRAWAL" schema="EXAMPLEDB_MASTER.PUBLIC" type="VIEW">
         <column comment="" dbType="INTEGER" javaType="Integer"
             name="MEMBER_ID" size="10" type="INTEGER"/>
         <column comment="" dbType="VARCHAR" javaType="String"
@@ -548,7 +549,7 @@
             name="MAX_PURCHASE_PRICE" size="10" type="INTEGER"/>
     </table>
     <table comment="退会理由: 会員に選ばせる定型的な退会理由のマスタ。" name="WITHDRAWAL_REASON"
-        schema="EXAMPLEDB.PUBLIC" type="TABLE">
+        schema="EXAMPLEDB_MASTER.PUBLIC" type="TABLE">
         <column comment="退会理由コード: " dbType="CHAR" javaType="String"
             name="WITHDRAWAL_REASON_CODE" pkName="CONSTRAINT_10"
             primaryKey="true" required="true" size="3" type="CHAR"/>
@@ -565,16 +566,16 @@
     </table>
     <sequenceGroup>
         <sequence incrementSize="1"
-            name="SYSTEM_SEQUENCE_AF7B3A0E_13BA_401B_B391_74E89AA367EE" schema="EXAMPLEDB.PUBLIC"/>
+            name="SYSTEM_SEQUENCE_F4B3F9CB_D633_403B_B4A0_158F814DB6A3" schema="EXAMPLEDB_MASTER.PUBLIC"/>
         <sequence incrementSize="1"
-            name="SYSTEM_SEQUENCE_0E1D006E_5410_467A_B6C7_2CBBA7C5EC2D" schema="EXAMPLEDB.PUBLIC"/>
+            name="SYSTEM_SEQUENCE_403A981A_BF95_4766_92EF_084ED14A92D8" schema="EXAMPLEDB_MASTER.PUBLIC"/>
         <sequence incrementSize="1"
-            name="SYSTEM_SEQUENCE_65D254F5_BE09_4070_BFF8_E486383BC887" schema="EXAMPLEDB.PUBLIC"/>
+            name="SYSTEM_SEQUENCE_FD0A76F9_26F8_4F2E_8672_0F0E7D959503" schema="EXAMPLEDB_MASTER.PUBLIC"/>
         <sequence incrementSize="1"
-            name="SYSTEM_SEQUENCE_DF6103EC_5AFB_4EEC_B609_F40C16451AE8" schema="EXAMPLEDB.PUBLIC"/>
+            name="SYSTEM_SEQUENCE_AAA26AAA_8F76_4F24_B5CE_565A102879B3" schema="EXAMPLEDB_MASTER.PUBLIC"/>
         <sequence incrementSize="1"
-            name="SYSTEM_SEQUENCE_789C8072_C6C8_4326_A57B_FAEBEB2918BD" schema="EXAMPLEDB.PUBLIC"/>
+            name="SYSTEM_SEQUENCE_B703111E_995D_4EC6_B73F_62DC61F24ADC" schema="EXAMPLEDB_MASTER.PUBLIC"/>
         <sequence incrementSize="1"
-            name="SYSTEM_SEQUENCE_751AC056_8D16_4670_9384_7FA5A4690656" schema="EXAMPLEDB.PUBLIC"/>
+            name="SYSTEM_SEQUENCE_EBBE1EFC_97CF_4F70_9AEA_C4A36CD694E0" schema="EXAMPLEDB_MASTER.PUBLIC"/>
     </sequenceGroup>
 </database>

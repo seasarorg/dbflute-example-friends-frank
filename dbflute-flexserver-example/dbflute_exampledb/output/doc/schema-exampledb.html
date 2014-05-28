@@ -266,7 +266,7 @@ dl.procedurelist dd.column pre {
 
 <body>
 <h1>Schema for exampledb (h2)</h1>
-<p class="mainschema">generated from <strong>EXAMPLEDB.PUBLIC</strong></p>
+<p class="mainschema">generated from <strong>EXAMPLEDB_MASTER.PUBLIC</strong></p>
 <div class="navilinkarea">
 <p class="sublink"><a href="#cdef">Classification Definition</a></p>
 <p class="sublink"><a href="#outsidesql">OutsideSql List</a></p>
@@ -714,7 +714,7 @@ MEMBER_ADDRESS
 		<td class="rownumcell">3</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
-		<td class="flgcell" title="UQ_MEMBER_ADDRESS_INDEX_B(MEMBER_ID, VALID_BEGIN_DATE)">o<span class="flgplus">+</span></td>
+		<td class="flgcell" title="UQ_MEMBER_ADDRESS_INDEX_B(MEMBER_ID, VALID_BEGIN_DATE)"><span class="flgplus">+</span>o</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
 		<td id="member_address_valid_begin_date">VALID_BEGIN_DATE</td>
@@ -926,7 +926,7 @@ MEMBER_LOGIN
 		<td class="rownumcell">3</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
-		<td class="flgcell" title="UQ_MEMBER_LOGIN_INDEX_B(MEMBER_ID, LOGIN_DATETIME)">o<span class="flgplus">+</span></td>
+		<td class="flgcell" title="UQ_MEMBER_LOGIN_INDEX_B(MEMBER_ID, LOGIN_DATETIME)"><span class="flgplus">+</span>o</td>
 		<td class="flgcell" title="IX_MEMBER_LOGIN_DATETIME(LOGIN_DATETIME)">o</td>
 		<td class="flgcell">*</td>
 		<td id="member_login_login_datetime">LOGIN_DATETIME</td>
@@ -2044,7 +2044,7 @@ PURCHASE
 		<td class="rownumcell">3</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
-		<td class="flgcell" title="UQ_PURCHASE_INDEX_9(MEMBER_ID, PRODUCT_ID, PURCHASE_DATETIME)">o<span class="flgplus">+</span></td>
+		<td class="flgcell" title="UQ_PURCHASE_INDEX_9(MEMBER_ID, PRODUCT_ID, PURCHASE_DATETIME)"><span class="flgplus">+</span>o</td>
 		<td class="flgcell" title="FK_PURCHASE_PRODUCT_INDEX_9(PRODUCT_ID), IX_PURCHASE_PRODUCT_DATETIME(PRODUCT_ID, PURCHASE_DATETIME)">o<span class="flgplus">+</span></td>
 		<td class="flgcell">*</td>
 		<td id="purchase_product_id">PRODUCT_ID</td>
@@ -2061,7 +2061,7 @@ PURCHASE
 		<td class="rownumcell">4</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
-		<td class="flgcell" title="UQ_PURCHASE_INDEX_9(MEMBER_ID, PRODUCT_ID, PURCHASE_DATETIME)">o<span class="flgplus">+</span></td>
+		<td class="flgcell" title="UQ_PURCHASE_INDEX_9(MEMBER_ID, PRODUCT_ID, PURCHASE_DATETIME)"><span class="flgplus">+</span>o</td>
 		<td class="flgcell" title="IX_PURCHASE_DATETIME_MEMBER(PURCHASE_DATETIME, MEMBER_ID), IX_PURCHASE_PRODUCT_DATETIME(PRODUCT_ID, PURCHASE_DATETIME)">o<span class="flgplus">+</span></td>
 		<td class="flgcell">*</td>
 		<td id="purchase_purchase_datetime">PURCHASE_DATETIME</td>

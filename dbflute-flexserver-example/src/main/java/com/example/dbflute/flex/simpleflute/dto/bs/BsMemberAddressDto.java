@@ -57,10 +57,10 @@ public abstract class BsMemberAddressDto implements Serializable {
     /** MEMBER_ADDRESS_ID: {PK, ID, NotNull, INTEGER(10)} */
     protected Integer _memberAddressId;
 
-    /** MEMBER_ID: {UQ, IX, NotNull, INTEGER(10), FK to MEMBER} */
+    /** MEMBER_ID: {UQ+, IX, NotNull, INTEGER(10), FK to MEMBER} */
     protected Integer _memberId;
 
-    /** VALID_BEGIN_DATE: {UQ+, NotNull, DATE(8)} */
+    /** VALID_BEGIN_DATE: {+UQ, NotNull, DATE(8)} */
     protected java.util.Date _validBeginDate;
 
     /** VALID_END_DATE: {NotNull, DATE(8)} */
@@ -222,7 +222,7 @@ public abstract class BsMemberAddressDto implements Serializable {
     }
 
     /**
-     * [get] MEMBER_ID: {UQ, IX, NotNull, INTEGER(10), FK to MEMBER} <br />
+     * [get] MEMBER_ID: {UQ+, IX, NotNull, INTEGER(10), FK to MEMBER} <br />
      * 会員ID: 会員を参照するID。<br />
      * 履歴分を含むため、これだけではユニークにはならない。<br />
      * 有効開始日と合わせて複合ユニーク制約となるが、<br />
@@ -235,7 +235,7 @@ public abstract class BsMemberAddressDto implements Serializable {
     }
 
     /**
-     * [set] MEMBER_ID: {UQ, IX, NotNull, INTEGER(10), FK to MEMBER} <br />
+     * [set] MEMBER_ID: {UQ+, IX, NotNull, INTEGER(10), FK to MEMBER} <br />
      * 会員ID: 会員を参照するID。<br />
      * 履歴分を含むため、これだけではユニークにはならない。<br />
      * 有効開始日と合わせて複合ユニーク制約となるが、<br />
@@ -249,7 +249,7 @@ public abstract class BsMemberAddressDto implements Serializable {
     }
 
     /**
-     * [get] VALID_BEGIN_DATE: {UQ+, NotNull, DATE(8)} <br />
+     * [get] VALID_BEGIN_DATE: {+UQ, NotNull, DATE(8)} <br />
      * 有効開始日: 一つの有効期間の開始を示す日付。<br />
      * 前の有効終了日の次の日の値が格納される。
      * @return The value of the column 'VALID_BEGIN_DATE'. (NullAllowed)
@@ -259,7 +259,7 @@ public abstract class BsMemberAddressDto implements Serializable {
     }
 
     /**
-     * [set] VALID_BEGIN_DATE: {UQ+, NotNull, DATE(8)} <br />
+     * [set] VALID_BEGIN_DATE: {+UQ, NotNull, DATE(8)} <br />
      * 有効開始日: 一つの有効期間の開始を示す日付。<br />
      * 前の有効終了日の次の日の値が格納される。
      * @param validBeginDate The value of the column 'VALID_BEGIN_DATE'. (NullAllowed)

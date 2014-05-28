@@ -90,10 +90,10 @@ public abstract class BsMemberAddress implements EntityDefinedCommonColumn, Seri
     /** MEMBER_ADDRESS_ID: {PK, ID, NotNull, INTEGER(10)} */
     protected Integer _memberAddressId;
 
-    /** MEMBER_ID: {UQ, IX, NotNull, INTEGER(10), FK to MEMBER} */
+    /** MEMBER_ID: {UQ+, IX, NotNull, INTEGER(10), FK to MEMBER} */
     protected Integer _memberId;
 
-    /** VALID_BEGIN_DATE: {UQ+, NotNull, DATE(8)} */
+    /** VALID_BEGIN_DATE: {+UQ, NotNull, DATE(8)} */
     protected java.util.Date _validBeginDate;
 
     /** VALID_END_DATE: {NotNull, DATE(8)} */
@@ -123,6 +123,9 @@ public abstract class BsMemberAddress implements EntityDefinedCommonColumn, Seri
     // -----------------------------------------------------
     //                                              Internal
     //                                              --------
+    /** The unique-driven properties for this entity. (NotNull) */
+    protected final EntityUniqueDrivenProperties __uniqueDrivenProperties = newUniqueDrivenProperties();
+
     /** The modified properties for this entity. (NotNull) */
     protected final EntityModifiedProperties __modifiedProperties = newModifiedProperties();
 
@@ -168,6 +171,30 @@ public abstract class BsMemberAddress implements EntityDefinedCommonColumn, Seri
     public boolean hasPrimaryKeyValue() {
         if (getMemberAddressId() == null) { return false; }
         return true;
+    }
+
+    /**
+     * To be unique by the unique column. <br />
+     * You can update the entity by the key when entity update (NOT batch update).
+     * @param memberId : UQ+, IX, NotNull, INTEGER(10), FK to MEMBER. (NotNull)
+     * @param validBeginDate : +UQ, NotNull, DATE(8). (NotNull)
+     */
+    public void uniqueBy(Integer memberId, java.util.Date validBeginDate) {
+        __uniqueDrivenProperties.clear();
+        __uniqueDrivenProperties.addPropertyName("memberId");
+        __uniqueDrivenProperties.addPropertyName("validBeginDate");
+        setMemberId(memberId);setValidBeginDate(validBeginDate);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Set<String> myuniqueDrivenProperties() {
+        return __uniqueDrivenProperties.getPropertyNames();
+    }
+
+    protected EntityUniqueDrivenProperties newUniqueDrivenProperties() {
+        return new EntityUniqueDrivenProperties();
     }
 
     // ===================================================================================
@@ -302,8 +329,8 @@ public abstract class BsMemberAddress implements EntityDefinedCommonColumn, Seri
         if (!xSV(getMemberAddressId(), other.getMemberAddressId())) { return false; }
         return true;
     }
-    protected boolean xSV(Object value1, Object value2) {
-        return FunCustodial.isSameValue(value1, value2);
+    protected boolean xSV(Object v1, Object v2) {
+        return FunCustodial.isSameValue(v1, v2);
     }
 
     /**
@@ -311,13 +338,13 @@ public abstract class BsMemberAddress implements EntityDefinedCommonColumn, Seri
      * @return The hash-code from primary-key or columns.
      */
     public int hashCode() {
-        int result = 17;
-        result = xCH(result, getTableDbName());
-        result = xCH(result, getMemberAddressId());
-        return result;
+        int hs = 17;
+        hs = xCH(hs, getTableDbName());
+        hs = xCH(hs, getMemberAddressId());
+        return hs;
     }
-    protected int xCH(int result, Object value) {
-        return FunCustodial.calculateHashcode(result, value);
+    protected int xCH(int hs, Object vl) {
+        return FunCustodial.calculateHashcode(hs, vl);
     }
 
     /**
@@ -341,15 +368,15 @@ public abstract class BsMemberAddress implements EntityDefinedCommonColumn, Seri
     public String toStringWithRelation() {
         StringBuilder sb = new StringBuilder();
         sb.append(toString());
-        String l = "\n  ";
+        String li = "\n  ";
         if (_member != null)
-        { sb.append(l).append(xbRDS(_member, "member")); }
+        { sb.append(li).append(xbRDS(_member, "member")); }
         if (_region != null)
-        { sb.append(l).append(xbRDS(_region, "region")); }
+        { sb.append(li).append(xbRDS(_region, "region")); }
         return sb.toString();
     }
-    protected String xbRDS(Entity e, String name) { // buildRelationDisplayString()
-        return e.buildDisplayString(name, true, true);
+    protected String xbRDS(Entity et, String name) { // buildRelationDisplayString()
+        return et.buildDisplayString(name, true, true);
     }
 
     /**
@@ -365,20 +392,20 @@ public abstract class BsMemberAddress implements EntityDefinedCommonColumn, Seri
     }
     protected String buildColumnString() {
         StringBuilder sb = new StringBuilder();
-        String delimiter = ", ";
-        sb.append(delimiter).append(getMemberAddressId());
-        sb.append(delimiter).append(getMemberId());
-        sb.append(delimiter).append(xfUD(getValidBeginDate()));
-        sb.append(delimiter).append(xfUD(getValidEndDate()));
-        sb.append(delimiter).append(getAddress());
-        sb.append(delimiter).append(getRegionId());
-        sb.append(delimiter).append(getRegisterDatetime());
-        sb.append(delimiter).append(getRegisterUser());
-        sb.append(delimiter).append(getUpdateDatetime());
-        sb.append(delimiter).append(getUpdateUser());
-        sb.append(delimiter).append(getVersionNo());
-        if (sb.length() > delimiter.length()) {
-            sb.delete(0, delimiter.length());
+        String dm = ", ";
+        sb.append(dm).append(getMemberAddressId());
+        sb.append(dm).append(getMemberId());
+        sb.append(dm).append(xfUD(getValidBeginDate()));
+        sb.append(dm).append(xfUD(getValidEndDate()));
+        sb.append(dm).append(getAddress());
+        sb.append(dm).append(getRegionId());
+        sb.append(dm).append(getRegisterDatetime());
+        sb.append(dm).append(getRegisterUser());
+        sb.append(dm).append(getUpdateDatetime());
+        sb.append(dm).append(getUpdateUser());
+        sb.append(dm).append(getVersionNo());
+        if (sb.length() > dm.length()) {
+            sb.delete(0, dm.length());
         }
         sb.insert(0, "{").append("}");
         return sb.toString();
@@ -391,11 +418,11 @@ public abstract class BsMemberAddress implements EntityDefinedCommonColumn, Seri
     }
     protected String buildRelationString() {
         StringBuilder sb = new StringBuilder();
-        String c = ",";
-        if (_member != null) { sb.append(c).append("member"); }
-        if (_region != null) { sb.append(c).append("region"); }
-        if (sb.length() > c.length()) {
-            sb.delete(0, c.length()).insert(0, "(").append(")");
+        String cm = ",";
+        if (_member != null) { sb.append(cm).append("member"); }
+        if (_region != null) { sb.append(cm).append("region"); }
+        if (sb.length() > cm.length()) {
+            sb.delete(0, cm.length()).insert(0, "(").append(")");
         }
         return sb.toString();
     }
@@ -437,7 +464,7 @@ public abstract class BsMemberAddress implements EntityDefinedCommonColumn, Seri
     }
 
     /**
-     * [get] MEMBER_ID: {UQ, IX, NotNull, INTEGER(10), FK to MEMBER} <br />
+     * [get] MEMBER_ID: {UQ+, IX, NotNull, INTEGER(10), FK to MEMBER} <br />
      * 会員ID: 会員を参照するID。<br />
      * 履歴分を含むため、これだけではユニークにはならない。<br />
      * 有効開始日と合わせて複合ユニーク制約となるが、<br />
@@ -450,7 +477,7 @@ public abstract class BsMemberAddress implements EntityDefinedCommonColumn, Seri
     }
 
     /**
-     * [set] MEMBER_ID: {UQ, IX, NotNull, INTEGER(10), FK to MEMBER} <br />
+     * [set] MEMBER_ID: {UQ+, IX, NotNull, INTEGER(10), FK to MEMBER} <br />
      * 会員ID: 会員を参照するID。<br />
      * 履歴分を含むため、これだけではユニークにはならない。<br />
      * 有効開始日と合わせて複合ユニーク制約となるが、<br />
@@ -464,7 +491,7 @@ public abstract class BsMemberAddress implements EntityDefinedCommonColumn, Seri
     }
 
     /**
-     * [get] VALID_BEGIN_DATE: {UQ+, NotNull, DATE(8)} <br />
+     * [get] VALID_BEGIN_DATE: {+UQ, NotNull, DATE(8)} <br />
      * 有効開始日: 一つの有効期間の開始を示す日付。<br />
      * 前の有効終了日の次の日の値が格納される。
      * @return The value of the column 'VALID_BEGIN_DATE'. (basically NotNull if selected: for the constraint)
@@ -474,7 +501,7 @@ public abstract class BsMemberAddress implements EntityDefinedCommonColumn, Seri
     }
 
     /**
-     * [set] VALID_BEGIN_DATE: {UQ+, NotNull, DATE(8)} <br />
+     * [set] VALID_BEGIN_DATE: {+UQ, NotNull, DATE(8)} <br />
      * 有効開始日: 一つの有効期間の開始を示す日付。<br />
      * 前の有効終了日の次の日の値が格納される。
      * @param validBeginDate The value of the column 'VALID_BEGIN_DATE'. (basically NotNull if update: for the constraint)

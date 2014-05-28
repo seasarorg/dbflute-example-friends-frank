@@ -1,4 +1,137 @@
 map:{
+    ; 2014/05/28 21:13:23 = map:{
+        ; diffDate = 2014/05/28 21:13:23
+        ; tableDiff = map:{
+            ; MEMBER = map:{
+                ; tableName = MEMBER
+                ; diffType = CHANGE
+                ; unifiedSchemaDiff = map:{
+                    ; next = EXAMPLEDB_MASTER.PUBLIC
+                    ; previous = EXAMPLEDB.PUBLIC
+                }
+            }
+            ; MEMBER_ADDRESS = map:{
+                ; tableName = MEMBER_ADDRESS
+                ; diffType = CHANGE
+                ; unifiedSchemaDiff = map:{
+                    ; next = EXAMPLEDB_MASTER.PUBLIC
+                    ; previous = EXAMPLEDB.PUBLIC
+                }
+            }
+            ; MEMBER_LOGIN = map:{
+                ; tableName = MEMBER_LOGIN
+                ; diffType = CHANGE
+                ; unifiedSchemaDiff = map:{
+                    ; next = EXAMPLEDB_MASTER.PUBLIC
+                    ; previous = EXAMPLEDB.PUBLIC
+                }
+            }
+            ; MEMBER_SECURITY = map:{
+                ; tableName = MEMBER_SECURITY
+                ; diffType = CHANGE
+                ; unifiedSchemaDiff = map:{
+                    ; next = EXAMPLEDB_MASTER.PUBLIC
+                    ; previous = EXAMPLEDB.PUBLIC
+                }
+            }
+            ; MEMBER_SERVICE = map:{
+                ; tableName = MEMBER_SERVICE
+                ; diffType = CHANGE
+                ; unifiedSchemaDiff = map:{
+                    ; next = EXAMPLEDB_MASTER.PUBLIC
+                    ; previous = EXAMPLEDB.PUBLIC
+                }
+            }
+            ; MEMBER_STATUS = map:{
+                ; tableName = MEMBER_STATUS
+                ; diffType = CHANGE
+                ; unifiedSchemaDiff = map:{
+                    ; next = EXAMPLEDB_MASTER.PUBLIC
+                    ; previous = EXAMPLEDB.PUBLIC
+                }
+            }
+            ; MEMBER_WITHDRAWAL = map:{
+                ; tableName = MEMBER_WITHDRAWAL
+                ; diffType = CHANGE
+                ; unifiedSchemaDiff = map:{
+                    ; next = EXAMPLEDB_MASTER.PUBLIC
+                    ; previous = EXAMPLEDB.PUBLIC
+                }
+            }
+            ; PRODUCT = map:{
+                ; tableName = PRODUCT
+                ; diffType = CHANGE
+                ; unifiedSchemaDiff = map:{
+                    ; next = EXAMPLEDB_MASTER.PUBLIC
+                    ; previous = EXAMPLEDB.PUBLIC
+                }
+            }
+            ; PRODUCT_CATEGORY = map:{
+                ; tableName = PRODUCT_CATEGORY
+                ; diffType = CHANGE
+                ; unifiedSchemaDiff = map:{
+                    ; next = EXAMPLEDB_MASTER.PUBLIC
+                    ; previous = EXAMPLEDB.PUBLIC
+                }
+            }
+            ; PRODUCT_STATUS = map:{
+                ; tableName = PRODUCT_STATUS
+                ; diffType = CHANGE
+                ; unifiedSchemaDiff = map:{
+                    ; next = EXAMPLEDB_MASTER.PUBLIC
+                    ; previous = EXAMPLEDB.PUBLIC
+                }
+            }
+            ; PURCHASE = map:{
+                ; tableName = PURCHASE
+                ; diffType = CHANGE
+                ; unifiedSchemaDiff = map:{
+                    ; next = EXAMPLEDB_MASTER.PUBLIC
+                    ; previous = EXAMPLEDB.PUBLIC
+                }
+            }
+            ; REGION = map:{
+                ; tableName = REGION
+                ; diffType = CHANGE
+                ; unifiedSchemaDiff = map:{
+                    ; next = EXAMPLEDB_MASTER.PUBLIC
+                    ; previous = EXAMPLEDB.PUBLIC
+                }
+            }
+            ; SERVICE_RANK = map:{
+                ; tableName = SERVICE_RANK
+                ; diffType = CHANGE
+                ; unifiedSchemaDiff = map:{
+                    ; next = EXAMPLEDB_MASTER.PUBLIC
+                    ; previous = EXAMPLEDB.PUBLIC
+                }
+            }
+            ; SUMMARY_PRODUCT = map:{
+                ; tableName = SUMMARY_PRODUCT
+                ; diffType = CHANGE
+                ; unifiedSchemaDiff = map:{
+                    ; next = EXAMPLEDB_MASTER.PUBLIC
+                    ; previous = EXAMPLEDB.PUBLIC
+                }
+            }
+            ; SUMMARY_WITHDRAWAL = map:{
+                ; tableName = SUMMARY_WITHDRAWAL
+                ; diffType = CHANGE
+                ; unifiedSchemaDiff = map:{
+                    ; next = EXAMPLEDB_MASTER.PUBLIC
+                    ; previous = EXAMPLEDB.PUBLIC
+                }
+            }
+            ; WITHDRAWAL_REASON = map:{
+                ; tableName = WITHDRAWAL_REASON
+                ; diffType = CHANGE
+                ; unifiedSchemaDiff = map:{
+                    ; next = EXAMPLEDB_MASTER.PUBLIC
+                    ; previous = EXAMPLEDB.PUBLIC
+                }
+            }
+        }
+    }
     ; 2014/05/13 01:32:48 = map:{
         ; diffDate = 2014/05/13 01:32:48
         ; tableDiff = map:{

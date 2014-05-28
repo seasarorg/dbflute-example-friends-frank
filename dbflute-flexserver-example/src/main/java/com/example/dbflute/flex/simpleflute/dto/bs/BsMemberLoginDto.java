@@ -56,10 +56,10 @@ public abstract class BsMemberLoginDto implements Serializable {
     /** MEMBER_LOGIN_ID: {PK, ID, NotNull, BIGINT(19)} */
     protected Long _memberLoginId;
 
-    /** MEMBER_ID: {UQ, IX, NotNull, INTEGER(10), FK to MEMBER} */
+    /** MEMBER_ID: {UQ+, IX, NotNull, INTEGER(10), FK to MEMBER} */
     protected Integer _memberId;
 
-    /** LOGIN_DATETIME: {UQ+, IX, NotNull, TIMESTAMP(23, 10)} */
+    /** LOGIN_DATETIME: {+UQ, IX, NotNull, TIMESTAMP(23, 10)} */
     protected java.sql.Timestamp _loginDatetime;
 
     /** MOBILE_LOGIN_FLG: {NotNull, INTEGER(10), classification=Flg} */
@@ -189,7 +189,7 @@ public abstract class BsMemberLoginDto implements Serializable {
     }
 
     /**
-     * [get] MEMBER_ID: {UQ, IX, NotNull, INTEGER(10), FK to MEMBER} <br />
+     * [get] MEMBER_ID: {UQ+, IX, NotNull, INTEGER(10), FK to MEMBER} <br />
      * 会員ID:
      * @return The value of the column 'MEMBER_ID'. (NullAllowed)
      */
@@ -198,7 +198,7 @@ public abstract class BsMemberLoginDto implements Serializable {
     }
 
     /**
-     * [set] MEMBER_ID: {UQ, IX, NotNull, INTEGER(10), FK to MEMBER} <br />
+     * [set] MEMBER_ID: {UQ+, IX, NotNull, INTEGER(10), FK to MEMBER} <br />
      * 会員ID:
      * @param memberId The value of the column 'MEMBER_ID'. (NullAllowed)
      */
@@ -208,7 +208,7 @@ public abstract class BsMemberLoginDto implements Serializable {
     }
 
     /**
-     * [get] LOGIN_DATETIME: {UQ+, IX, NotNull, TIMESTAMP(23, 10)} <br />
+     * [get] LOGIN_DATETIME: {+UQ, IX, NotNull, TIMESTAMP(23, 10)} <br />
      * ログイン日時: ログインした瞬間の日時。
      * @return The value of the column 'LOGIN_DATETIME'. (NullAllowed)
      */
@@ -217,7 +217,7 @@ public abstract class BsMemberLoginDto implements Serializable {
     }
 
     /**
-     * [set] LOGIN_DATETIME: {UQ+, IX, NotNull, TIMESTAMP(23, 10)} <br />
+     * [set] LOGIN_DATETIME: {+UQ, IX, NotNull, TIMESTAMP(23, 10)} <br />
      * ログイン日時: ログインした瞬間の日時。
      * @param loginDatetime The value of the column 'LOGIN_DATETIME'. (NullAllowed)
      */
