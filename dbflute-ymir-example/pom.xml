@@ -13,9 +13,9 @@
 	<properties>
 		<seasar.version>2.4.46</seasar.version>
 		<ymir.version>1.0.7</ymir.version>
-		<dbflute.version>1.0.5F</dbflute.version>
+		<dbflute.version>1.0.5G</dbflute.version>
 		<h2.jdbc.version>1.4.178</h2.jdbc.version>
-		<utflute.version>0.4.4</utflute.version>
+		<utflute.version>0.4.5</utflute.version>
 	</properties>
 
 	<url>http://dbflute.sandbox.seasar.org/</url>
