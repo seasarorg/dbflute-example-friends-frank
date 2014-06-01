@@ -303,6 +303,7 @@ public class BsPurchaseCB extends AbstractConditionBean {
         { _nssMember = new MemberNss(query().queryMember()); }
         return _nssMember;
     }
+
     protected ProductNss _nssProduct;
     public ProductNss getNssProduct() {
         if (_nssProduct == null) { _nssProduct = new ProductNss(null); }
@@ -330,6 +331,7 @@ public class BsPurchaseCB extends AbstractConditionBean {
         { _nssProduct = new ProductNss(query().queryProduct()); }
         return _nssProduct;
     }
+
     protected SummaryProductNss _nssSummaryProduct;
     public SummaryProductNss getNssSummaryProduct() {
         if (_nssSummaryProduct == null) { _nssSummaryProduct = new SummaryProductNss(null); }
