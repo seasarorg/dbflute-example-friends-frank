@@ -337,7 +337,8 @@ public class RequestLoggingFilter implements Filter {
 
         // show only dynamic values in request
         sb.append(LF);
-        buildCookies(sb, request);
+        // hope response cookie (not request cookie)
+        //buildCookies(sb, request);
         buildRequestAttributes(sb, request);
         buildSessionAttributes(sb, request);
 
