@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
 
-import org.seasar.dbflute.dbmeta.DBMeta;
 import org.seasar.dbflute.Entity;
+import org.seasar.dbflute.dbmeta.DBMeta;
 import com.example.dbflute.sastruts.dbflute.allcommon.DBMetaInstanceHandler;
 import com.example.dbflute.sastruts.dbflute.allcommon.CDef;
 import com.example.dbflute.sastruts.dbflute.exentity.*;
@@ -249,16 +249,13 @@ public abstract class BsSummaryProduct implements Entity, Serializable, Cloneabl
     }
 
     // ===================================================================================
-    //                                                           Classification Name/Alias
-    //                                                           =========================
-    // ===================================================================================
     //                                                                    Foreign Property
     //                                                                    ================
     /** (商品ステータス)PRODUCT_STATUS by my PRODUCT_STATUS_CODE, named 'productStatus'. */
     protected ProductStatus _productStatus;
 
     /**
-     * (商品ステータス)PRODUCT_STATUS by my PRODUCT_STATUS_CODE, named 'productStatus'.
+     * [get] (商品ステータス)PRODUCT_STATUS by my PRODUCT_STATUS_CODE, named 'productStatus'.
      * @return The entity of foreign property 'productStatus'. (NullAllowed: when e.g. null FK column, no setupSelect)
      */
     public ProductStatus getProductStatus() {
@@ -266,7 +263,7 @@ public abstract class BsSummaryProduct implements Entity, Serializable, Cloneabl
     }
 
     /**
-     * (商品ステータス)PRODUCT_STATUS by my PRODUCT_STATUS_CODE, named 'productStatus'.
+     * [set] (商品ステータス)PRODUCT_STATUS by my PRODUCT_STATUS_CODE, named 'productStatus'.
      * @param productStatus The entity of foreign property 'productStatus'. (NullAllowed)
      */
     public void setProductStatus(ProductStatus productStatus) {
@@ -460,7 +457,7 @@ public abstract class BsSummaryProduct implements Entity, Serializable, Cloneabl
      */
     public void setProductId(Integer productId) {
         __modifiedProperties.addPropertyName("productId");
-        this._productId = productId;
+        _productId = productId;
     }
 
     /**
@@ -477,7 +474,7 @@ public abstract class BsSummaryProduct implements Entity, Serializable, Cloneabl
      */
     public void setProductName(String productName) {
         __modifiedProperties.addPropertyName("productName");
-        this._productName = productName;
+        _productName = productName;
     }
 
     /**
@@ -494,7 +491,7 @@ public abstract class BsSummaryProduct implements Entity, Serializable, Cloneabl
      */
     public void setProductHandleCode(String productHandleCode) {
         __modifiedProperties.addPropertyName("productHandleCode");
-        this._productHandleCode = productHandleCode;
+        _productHandleCode = productHandleCode;
     }
 
     /**
@@ -511,7 +508,7 @@ public abstract class BsSummaryProduct implements Entity, Serializable, Cloneabl
      */
     protected void setProductStatusCode(String productStatusCode) {
         __modifiedProperties.addPropertyName("productStatusCode");
-        this._productStatusCode = productStatusCode;
+        _productStatusCode = productStatusCode;
     }
 
     /**
@@ -528,7 +525,7 @@ public abstract class BsSummaryProduct implements Entity, Serializable, Cloneabl
      */
     public void setLatestPurchaseDatetime(java.sql.Timestamp latestPurchaseDatetime) {
         __modifiedProperties.addPropertyName("latestPurchaseDatetime");
-        this._latestPurchaseDatetime = latestPurchaseDatetime;
+        _latestPurchaseDatetime = latestPurchaseDatetime;
     }
 
     protected String convertEmptyToNull(String value) {
