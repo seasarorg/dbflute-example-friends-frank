@@ -97,7 +97,7 @@ public class RequestLoggingFilter implements Filter {
     protected void setupExceptExtSet(FilterConfig filterConfig) {
         final String value = filterConfig.getInitParameter("exceptExtSet");
         if (value != null) {
-            final String[] splitAry = value.split(","); // e.g. js,css,png,gif,jpg,ico,svg,svgz
+            final String[] splitAry = value.split(","); // e.g. js,css,png,gif,jpg,ico,svg,svgz,ttf
             exceptExtSet = new LinkedHashSet<String>();
             for (String element : splitAry) {
                 exceptExtSet.add("." + element.trim());
@@ -109,7 +109,7 @@ public class RequestLoggingFilter implements Filter {
     }
 
     protected List<String> getDefaultExceptExtSet() {
-        return Arrays.asList(".js", ".css", ".png", ".gif", ".jpg", ".ico", ".svg", ".svgz");
+        return Arrays.asList(".js", ".css", ".png", ".gif", ".jpg", ".ico", ".svg", ".svgz", ".ttf");
     }
 
     protected void setupExceptUrlPattern(FilterConfig filterConfig) {
@@ -455,18 +455,28 @@ public class RequestLoggingFilter implements Filter {
         }
     }
 
-    protected Object filterAttributeDisp(final Object attr) {
-        final Object filtered;
+    protected String filterAttributeDisp(final Object attr) {
+        if (attr == null) {
+            return "null";
+        }
+        final String stringExp;
         if (attr instanceof Throwable) { // exception will be displayed in another way
-            final String msg = ((Throwable) attr).getMessage();
-            final String ln = "\n";
-            if (msg != null && msg.contains(ln)) {
-                filtered = msg.substring(0, msg.indexOf(ln));
-            } else {
-                filtered = msg;
-            }
+            stringExp = ((Throwable) attr).getMessage();
         } else {
-            filtered = attr;
+            stringExp = attr.toString();
+        }
+        // might contain line separator in the expression
+        // and large display is noisy for debug so one liner
+        return convertToOneLinerDisp(stringExp);
+    }
+
+    protected String convertToOneLinerDisp(final String msg) {
+        final String filtered;
+        final String ln = "\n";
+        if (msg != null && msg.contains(ln)) {
+            filtered = msg.substring(0, msg.indexOf(ln)) + "...";
+        } else {
+            filtered = msg;
         }
         return filtered;
     }
