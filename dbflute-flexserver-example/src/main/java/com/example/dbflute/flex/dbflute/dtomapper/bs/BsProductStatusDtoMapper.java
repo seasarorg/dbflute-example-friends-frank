@@ -11,6 +11,11 @@ import org.seasar.dbflute.Entity;
 import org.seasar.dbflute.bhv.DtoMapper;
 import org.seasar.dbflute.bhv.InstanceKeyDto;
 import org.seasar.dbflute.bhv.InstanceKeyEntity;
+import org.seasar.dbflute.dbmeta.DBMeta;
+import org.seasar.dbflute.helper.beans.DfBeanDesc;
+import org.seasar.dbflute.helper.beans.DfPropertyDesc;
+import org.seasar.dbflute.helper.beans.factory.DfBeanDescFactory;
+import org.seasar.dbflute.jdbc.Classification;
 import com.example.dbflute.flex.dbflute.exentity.*;
 import com.example.dbflute.flex.simpleflute.dto.*;
 import com.example.dbflute.flex.dbflute.dtomapper.*;
@@ -61,6 +66,7 @@ public abstract class BsProductStatusDtoMapper implements DtoMapper<ProductStatu
     //                                                                           =========
     protected final Map<Entity, Object> _relationDtoMap;
     protected final Map<Object, Entity> _relationEntityMap;
+    protected boolean _exceptCommonColumn;
     protected boolean _reverseReference; // default: one-way reference
     protected boolean _instanceCache = true; // default: cached
     protected boolean _suppressProductList;
@@ -97,16 +103,19 @@ public abstract class BsProductStatusDtoMapper implements DtoMapper<ProductStatu
         if (cachedLocalDto != null) {
             return (ProductStatusDto)cachedLocalDto;
         }
+        boolean exceptCommonColumn = isExceptCommonColumn();
         ProductStatusDto dto = new ProductStatusDto();
         dto.setProductStatusCode(entity.getProductStatusCode());
         dto.setProductStatusName(entity.getProductStatusName());
         dto.setDisplayOrder(entity.getDisplayOrder());
+        reflectDerivedProperty(entity, dto, true);
         if (instanceCache && entity.hasPrimaryKeyValue()) { // caches only a DTO that has a primary key value
             _relationDtoMap.put(localKey, dto);
         }
-        boolean reverseReference = _reverseReference;
+        boolean reverseReference = isReverseReference();
         if (!_suppressProductList && !entity.getProductList().isEmpty()) {
             ProductDtoMapper mapper = new ProductDtoMapper(_relationDtoMap, _relationEntityMap);
+            mapper.setExceptCommonColumn(exceptCommonColumn);
             mapper.setReverseReference(reverseReference);
             if (!instanceCache) { mapper.disableInstanceCache(); }
             mapper.suppressProductStatus();
@@ -158,6 +167,7 @@ public abstract class BsProductStatusDtoMapper implements DtoMapper<ProductStatu
         if (cachedLocalEntity != null) {
             return (ProductStatus)cachedLocalEntity;
         }
+        boolean exceptCommonColumn = isExceptCommonColumn();
         ProductStatus entity = new ProductStatus();
         if (needsMapping(dto, dto.getProductStatusCode(), "productStatusCode")) {
             entity.setProductStatusCode(dto.getProductStatusCode());
@@ -168,12 +178,14 @@ public abstract class BsProductStatusDtoMapper implements DtoMapper<ProductStatu
         if (needsMapping(dto, dto.getDisplayOrder(), "displayOrder")) {
             entity.setDisplayOrder(dto.getDisplayOrder());
         }
+        reflectDerivedProperty(entity, dto, false);
         if (instanceCache && entity.hasPrimaryKeyValue()) { // caches only an entity that has a primary key value
             _relationEntityMap.put(localKey, entity);
         }
-        boolean reverseReference = _reverseReference;
+        boolean reverseReference = isReverseReference();
         if (!_suppressProductList && !dto.getProductList().isEmpty()) {
             ProductDtoMapper mapper = new ProductDtoMapper(_relationDtoMap, _relationEntityMap);
+            mapper.setExceptCommonColumn(exceptCommonColumn);
             mapper.setReverseReference(reverseReference);
             if (!instanceCache) { mapper.disableInstanceCache(); }
             mapper.suppressProductStatus();
@@ -255,6 +267,50 @@ public abstract class BsProductStatusDtoMapper implements DtoMapper<ProductStatu
         _instanceCache = false;
     }
 
+    // -----------------------------------------------------
+    //                                      Derived Property
+    //                                      ----------------
+    protected void reflectDerivedProperty(Entity entity, Object dto, boolean toDto) {
+        DfBeanDesc entityDesc = DfBeanDescFactory.getBeanDesc(entity.getClass());
+        DfBeanDesc dtoDesc = DfBeanDescFactory.getBeanDesc(dto.getClass());
+        DBMeta dbmeta = entity.getDBMeta();
+        for (String propertyName : entityDesc.getProppertyNameList()) {
+            if (isOutOfDerivedPropertyName(entity, dto, toDto, dbmeta, entityDesc, dtoDesc, propertyName)) {
+                continue;
+            }
+            DfPropertyDesc entityProp = entityDesc.getPropertyDesc(propertyName);
+            Class<?> propertyType = entityProp.getPropertyType();
+            if (isOutOfDerivedPropertyType(entity, dto, toDto, propertyName, propertyType)) {
+                continue;
+            }
+            if (entityProp.isReadable() && entityProp.isWritable()) {
+                DfPropertyDesc dtoProp = dtoDesc.getPropertyDesc(propertyName);
+                if (dtoProp.isReadable() && dtoProp.isWritable()) {
+                    if (toDto) {
+                        dtoProp.setValue(dto, entityProp.getValue(entity));
+                    } else {
+                        entityProp.setValue(entity, dtoProp.getValue(dto));
+                    }
+                }
+            }
+        }
+    }
+
+    protected boolean isOutOfDerivedPropertyName(Entity entity, Object dto, boolean toDto
+                                               , DBMeta dbmeta, DfBeanDesc entityDesc, DfBeanDesc dtoDesc
+                                               , String propertyName) {
+        return dbmeta.hasColumn(propertyName)
+                    || dbmeta.hasForeign(propertyName) || dbmeta.hasReferrer(propertyName)
+                    || !dtoDesc.hasPropertyDesc(propertyName);
+    }
+
+    protected boolean isOutOfDerivedPropertyType(Entity entity, Object dto, boolean toDto
+                                               , String propertyName, Class<?> propertyType) {
+        return List.class.isAssignableFrom(propertyType)
+                || Entity.class.isAssignableFrom(propertyType)
+                || Classification.class.isAssignableFrom(propertyType);
+    }
+
     // ===================================================================================
     //                                                                   Suppress Relation
     //                                                                   =================
@@ -283,10 +339,55 @@ public abstract class BsProductStatusDtoMapper implements DtoMapper<ProductStatu
         }
     }
 
+    protected boolean isExceptCommonColumn() {
+        return _exceptCommonColumn;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setExceptCommonColumn(boolean exceptCommonColumn) {
+        _exceptCommonColumn = exceptCommonColumn;
+    }
+
+    protected boolean isReverseReference() {
+        return _reverseReference;
+    }
+
     /**
      * {@inheritDoc}
      */
     public void setReverseReference(boolean reverseReference) {
         _reverseReference = reverseReference;
+    }
+
+    // -----------------------------------------------------
+    //                                           Easy-to-Use
+    //                                           -----------
+    /**
+     * Enable base-only mapping that means the mapping ignores all references.
+     * @return this. (NotNull)
+     */
+    public ProductStatusDtoMapper baseOnlyMapping() {
+        setBaseOnlyMapping(true);
+        return (ProductStatusDtoMapper)this;
+    }
+
+    /**
+     * Enable except common column that means the mapping excepts common column.
+     * @return this. (NotNull)
+     */
+    public ProductStatusDtoMapper exceptCommonColumn() {
+        setExceptCommonColumn(true);
+        return (ProductStatusDtoMapper)this;
+    }
+
+    /**
+     * Enable reverse reference that means the mapping contains reverse references.
+     * @return this. (NotNull)
+     */
+    public ProductStatusDtoMapper reverseReference() {
+        setReverseReference(true);
+        return (ProductStatusDtoMapper)this;
     }
 }

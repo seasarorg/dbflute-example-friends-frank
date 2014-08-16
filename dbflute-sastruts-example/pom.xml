@@ -11,12 +11,12 @@
 	<description>The example project for SAStruts and DBFlute</description>
 
 	<properties>
-		<dbflute.version>1.0.5J</dbflute.version>
+		<dbflute.version>1.0.5K-RC1</dbflute.version>
 		<h2.jdbc.version>1.4.178</h2.jdbc.version>
 		<seasar.version>2.4.46</seasar.version>
 		<classbuilder.version>0.0.11</classbuilder.version>
 		<sastruts.version>1.0.4-sp9</sastruts.version>
-		<utflute.version>0.4.5</utflute.version>
+		<utflute.version>0.4.6</utflute.version>
 	</properties>
 
 	<url>http://dbflute.sandbox.seasar.org/</url>
