@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2014 the Seasar Foundation and the Others.
+ * Copyright 2014-2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 package org.dbflute.saflute.web.servlet.filter;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -52,6 +53,11 @@ import org.apache.commons.logging.LogFactory;
  * 
  * <p>The requests for resource files, e.g. JavaScript(.js) and CSS(.css), is out of target.
  * You can customize it by {@link FilterConfig}.</p>
+ *
+ * <p>And if no encoding in request, character encoding is set (default: UTF-8)
+ * to handle request parameters correctly in this filter for debug.
+ * e.g. Tomcat parses them as latin1 and keep parsed parameters in request object.
+ * It is set in spite of log level for same behavior in several environments.</p>
  * @author jflute
  */
 public class RequestLoggingFilter implements Filter {
@@ -76,6 +82,7 @@ public class RequestLoggingFilter implements Filter {
     protected Pattern exceptUrlPattern;
     protected Pattern requestUriTitleUrlPattern;
     protected Pattern subRequestUrlPattern;
+    protected String requestCharacterEncoding;
 
     // ===================================================================================
     //                                                                          Initialize
@@ -87,6 +94,7 @@ public class RequestLoggingFilter implements Filter {
         setupExceptUrlPattern(filterConfig);
         setupRequestUriTitleUrlPattern(filterConfig);
         setupSubRequestUrlPatternUrlPattern(filterConfig);
+        setupRequestCharacterEncoding(filterConfig);
     }
 
     protected boolean isBooleanParameter(FilterConfig filterConfig, String name, boolean defaultValue) {
@@ -136,6 +144,10 @@ public class RequestLoggingFilter implements Filter {
         }
     }
 
+    protected void setupRequestCharacterEncoding(FilterConfig filterConfig) {
+        this.requestCharacterEncoding = filterConfig.getInitParameter("requestCharacterEncoding");
+    }
+
     // ===================================================================================
     //                                                                              Filter
     //                                                                              ======
@@ -154,6 +166,7 @@ public class RequestLoggingFilter implements Filter {
             chain.doFilter(request, response);
             return;
         }
+        prepareCharacterEncodingIfNeeds(request);
 
         Long before = null;
         if (LOG.isDebugEnabled()) {
@@ -168,7 +181,7 @@ public class RequestLoggingFilter implements Filter {
                 existsServerError = true;
             }
         } catch (Request404NotFoundException e) {
-            handle404NotFound(response, e);
+            handle404NotFound(request, response, e);
         } catch (RuntimeException e) {
             sendInternalServerError(request, response, e);
             logError(request, response, "*RuntimeException occurred.", e);
@@ -178,7 +191,7 @@ public class RequestLoggingFilter implements Filter {
         } catch (ServletException e) {
             final Throwable rootCause = e.getRootCause();
             if (rootCause instanceof Request404NotFoundException) {
-                handle404NotFound(response, (Request404NotFoundException) rootCause);
+                handle404NotFound(request, response, (Request404NotFoundException) rootCause);
             } else {
                 final Throwable realCause = rootCause != null ? rootCause : e;
                 sendInternalServerError(request, response, realCause);
@@ -248,6 +261,17 @@ public class RequestLoggingFilter implements Filter {
 
     protected void clearHandler() {
         REQUEST_500_HANDLER_LOCAL.set(null);
+    }
+
+    protected void prepareCharacterEncodingIfNeeds(HttpServletRequest request) throws UnsupportedEncodingException {
+        if (request.getCharacterEncoding() == null) {
+            // logging filter calls parameters for debug
+            // but if no setting of encoding, Tomcat parses parameters as latin1
+            // and keep the parameters parsed by wrong encoding in request object
+            // so needs to set encoding here
+            // (it is set in spite of log level for same behavior in several environments)
+            request.setCharacterEncoding(requestCharacterEncoding != null ? requestCharacterEncoding : "UTF-8");
+        }
     }
 
     // -----------------------------------------------------
@@ -564,16 +588,32 @@ public class RequestLoggingFilter implements Filter {
     // ===================================================================================
     //                                                                       404 Not Found
     //                                                                       =============
-    protected void handle404NotFound(HttpServletResponse response, Request404NotFoundException notFoundEx)
-            throws IOException {
+    protected void handle404NotFound(HttpServletRequest request, HttpServletResponse response,
+            Request404NotFoundException notFoundEx) throws IOException {
         if (response.isCommitted()) {
             if (LOG.isDebugEnabled()) {
-                LOG.debug("*Cannot send error as '404 Not Found' because of already committed");
+                String requestURI = request.getRequestURI();
+                LOG.debug("*Cannot send error as '404 Not Found' because of already committed: path=" + requestURI);
             }
             return; // cannot help it
         }
         if (LOG.isDebugEnabled()) {
-            LOG.debug("...Sending error as '404 Not Found' manually: " + notFoundEx.getMessage());
+            final String requestURI = request.getRequestURI();
+            final StringBuilder sb = new StringBuilder();
+            final Throwable nestEx = notFoundEx.getCause();
+            sb.append("\n");
+            sb.append("/= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = *Manual 404 Not Found:\n");
+            sb.append("...Sending error as '404 Not Found' manually\n");
+            sb.append(" request: ").append(requestURI).append("\n");
+            sb.append(" message: ").append(notFoundEx.getMessage()).append("\n");
+            if (nestEx != null && !(nestEx instanceof Request404NotFoundException)) {
+                sb.append(" nested:\n");
+                sb.append("   ").append(nestEx.getClass().getName()).append("\n");
+                sb.append("   ").append(nestEx.getMessage()).append("\n");
+            }
+            sb.append("= = = = = = = = = =/");
+            final String msg = sb.toString();
+            LOG.debug(msg);
         }
         try {
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -666,7 +706,7 @@ public class RequestLoggingFilter implements Filter {
     }
 
     // ===================================================================================
-    //                                                                             Destory
+    //                                                                             Destroy
     //                                                                             =======
     public void destroy() {
         config = null;
