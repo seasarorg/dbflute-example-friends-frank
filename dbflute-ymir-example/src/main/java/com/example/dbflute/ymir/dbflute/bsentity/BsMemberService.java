@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.seasar.dbflute.dbmeta.DBMeta;
 import org.seasar.dbflute.dbmeta.AbstractEntity;
+import org.seasar.dbflute.dbmeta.accessory.DomainEntity;
 import com.example.dbflute.ymir.dbflute.allcommon.EntityDefinedCommonColumn;
 import com.example.dbflute.ymir.dbflute.allcommon.DBMetaInstanceHandler;
 import com.example.dbflute.ymir.dbflute.exentity.*;
@@ -63,7 +64,7 @@ import com.example.dbflute.ymir.dbflute.exentity.*;
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
-public abstract class BsMemberService extends AbstractEntity implements EntityDefinedCommonColumn {
+public abstract class BsMemberService extends AbstractEntity implements DomainEntity, EntityDefinedCommonColumn {
 
     // ===================================================================================
     //                                                                          Definition
